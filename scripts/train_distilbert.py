@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DistilBERT training placeholder script."""
+"""Train or dry-run a DistilBERT multi-label baseline."""
 
 from pathlib import Path
 import sys

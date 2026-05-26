@@ -190,6 +190,27 @@ python3 scripts/evaluate_llm_predictions.py \
 
 Few-shot demonstrations must come from training examples only. Do not include validation, seen-test, unseen-family-test, or unseen-family examples as demonstrations.
 
+## Stage 6: Fine-tuning
+
+Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on encoder models such as DistilBERT, RoBERTa, or DeBERTa.
+
+The first fine-tuning scaffold is DistilBERT multi-label classification over the fixed error-label taxonomy. Full generated datasets are not committed to git; regenerate them locally before running real training.
+
+Dry-run command:
+
+```bash
+python3 scripts/train_distilbert.py \
+  --train data/generated/final_train.jsonl \
+  --validation data/generated/final_validation.jsonl \
+  --dry-run true
+```
+
+Optional training dependencies can be installed with:
+
+```bash
+python3 -m pip install -e ".[train]"
+```
+
 ## Documentation
 
 See `docs/` for stage summaries and `docs/results/` for checked-in baseline and contract-dependence reports.
