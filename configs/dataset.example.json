@@ -1,0 +1,10 @@
+{
+  "dataset_name": "semantic-api-diagnosis-example",
+  "count": 10,
+  "seed": 42,
+  "error_types": [
+    "missing_required_field",
+    "wrong_type",
+    "semantic_mismatch"
+  ]
+}

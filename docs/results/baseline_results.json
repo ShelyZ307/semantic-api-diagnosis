@@ -1,0 +1,6607 @@
+{
+  "contract_dependence": {
+    "contract_dependent_seen_test": {
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.2857142857142857,
+          "macro_precision": 0.3,
+          "macro_recall": 0.275,
+          "micro_f1": 0.68013468013468,
+          "micro_precision": 1.0,
+          "micro_recall": 0.5153061224489796,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 8
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8571428571428571,
+              "fn": 13,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.75,
+              "tp": 39
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 54
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.225,
+        "critical_semantic_error_miss_rate_high_severity": 0.225,
+        "exact_match_label_set_accuracy": 0.46153846153846156,
+        "semantic_labels": {
+          "macro_f1": 0.6190476190476191,
+          "micro_f1": 0.8732394366197184,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8571428571428571,
+              "fn": 13,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.75,
+              "tp": 39
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 54
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5976331360946746,
+          "macro_f1": 0.4330708661417323,
+          "per_label": {
+            "high": {
+              "f1": 0.732283464566929,
+              "fn": 68,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.577639751552795,
+              "tp": 93
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 8
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 68,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.5976331360946746,
+          "f1": 0.7481481481481481,
+          "fn": 68,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.5976331360946746,
+          "tp": 101
+        }
+      }
+    },
+    "contract_dependent_unseen_test": {
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.2725,
+          "macro_precision": 0.3,
+          "macro_recall": 0.2568627450980392,
+          "micro_f1": 0.7010309278350516,
+          "micro_precision": 1.0,
+          "micro_recall": 0.5396825396825397,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 23
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.725,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5686274509803921,
+              "tp": 29
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 50
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.21782178217821782,
+        "critical_semantic_error_miss_rate_high_severity": 0.21782178217821782,
+        "exact_match_label_set_accuracy": 0.4906832298136646,
+        "semantic_labels": {
+          "macro_f1": 0.5750000000000001,
+          "micro_f1": 0.8777777777777778,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.725,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5686274509803921,
+              "tp": 29
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 50
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.6335403726708074,
+          "macro_f1": 0.4320276497695853,
+          "per_label": {
+            "high": {
+              "f1": 0.7281105990783411,
+              "fn": 59,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.572463768115942,
+              "tp": 79
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 23
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 59,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.6335403726708074,
+          "f1": 0.7756653992395437,
+          "fn": 59,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.6335403726708074,
+          "tp": 102
+        }
+      }
+    },
+    "seen_test": {
+      "bucket_counts": {
+        "contract_dependent": 169,
+        "mixed": 59,
+        "request_obvious": 307,
+        "valid": 165
+      },
+      "semantic_bucket_counts": {
+        "contract_dependent": 120,
+        "mixed": 37,
+        "request_obvious": 35
+      },
+      "semantic_total": 192,
+      "total": 700
+    },
+    "unseen_family_test": {
+      "bucket_counts": {
+        "contract_dependent": 161,
+        "mixed": 57,
+        "request_obvious": 288,
+        "valid": 194
+      },
+      "semantic_bucket_counts": {
+        "contract_dependent": 101,
+        "mixed": 28,
+        "request_obvious": 66
+      },
+      "semantic_total": 195,
+      "total": 700
+    }
+  },
+  "hard_subsets": {
+    "contract_dependent_seen_test": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9526627218934911,
+          "macro_f1": 0.24393939393939393,
+          "per_label": {
+            "high": {
+              "f1": 0.9757575757575757,
+              "fn": 0,
+              "fp": 8,
+              "precision": 0.9526627218934911,
+              "recall": 1.0,
+              "tp": 161
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 169
+        }
+      },
+      "majority_empty": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9526627218934911,
+          "macro_f1": 0.24393939393939393,
+          "per_label": {
+            "high": {
+              "f1": 0.9757575757575757,
+              "fn": 0,
+              "fp": 8,
+              "precision": 0.9526627218934911,
+              "recall": 1.0,
+              "tp": 161
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 169
+        }
+      },
+      "majority_frequent": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 54,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9526627218934911,
+          "macro_f1": 0.24393939393939393,
+          "per_label": {
+            "high": {
+              "f1": 0.9757575757575757,
+              "fn": 0,
+              "fp": 8,
+              "precision": 0.9526627218934911,
+              "recall": 1.0,
+              "tp": 161
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 8,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 169
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.2857142857142857,
+          "macro_precision": 0.3,
+          "macro_recall": 0.275,
+          "micro_f1": 0.68013468013468,
+          "micro_precision": 1.0,
+          "micro_recall": 0.5153061224489796,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 8
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8571428571428571,
+              "fn": 13,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.75,
+              "tp": 39
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 54
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.225,
+        "critical_semantic_error_miss_rate_high_severity": 0.225,
+        "exact_match_label_set_accuracy": 0.46153846153846156,
+        "semantic_labels": {
+          "macro_f1": 0.6190476190476191,
+          "micro_f1": 0.8732394366197184,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 14,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8571428571428571,
+              "fn": 13,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.75,
+              "tp": 39
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 54
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5976331360946746,
+          "macro_f1": 0.4330708661417323,
+          "per_label": {
+            "high": {
+              "f1": 0.732283464566929,
+              "fn": 68,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.577639751552795,
+              "tp": 93
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 8
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 68,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.5976331360946746,
+          "f1": 0.7481481481481481,
+          "fn": 68,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.5976331360946746,
+          "tp": 101
+        }
+      }
+    },
+    "contract_dependent_unseen_test": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8571428571428571,
+          "macro_f1": 0.23076923076923075,
+          "per_label": {
+            "high": {
+              "f1": 0.923076923076923,
+              "fn": 0,
+              "fp": 23,
+              "precision": 0.8571428571428571,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 161
+        }
+      },
+      "majority_empty": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8571428571428571,
+          "macro_f1": 0.23076923076923075,
+          "per_label": {
+            "high": {
+              "f1": 0.923076923076923,
+              "fn": 0,
+              "fp": 23,
+              "precision": 0.8571428571428571,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 161
+        }
+      },
+      "majority_frequent": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.0,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 50,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8571428571428571,
+          "macro_f1": 0.23076923076923075,
+          "per_label": {
+            "high": {
+              "f1": 0.923076923076923,
+              "fn": 0,
+              "fp": 23,
+              "precision": 0.8571428571428571,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 23,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 161
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.2725,
+          "macro_precision": 0.3,
+          "macro_recall": 0.2568627450980392,
+          "micro_f1": 0.7010309278350516,
+          "micro_precision": 1.0,
+          "micro_recall": 0.5396825396825397,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 23
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.725,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5686274509803921,
+              "tp": 29
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 50
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.21782178217821782,
+        "critical_semantic_error_miss_rate_high_severity": 0.21782178217821782,
+        "exact_match_label_set_accuracy": 0.4906832298136646,
+        "semantic_labels": {
+          "macro_f1": 0.5750000000000001,
+          "micro_f1": 0.8777777777777778,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.725,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5686274509803921,
+              "tp": 29
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 50
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.6335403726708074,
+          "macro_f1": 0.4320276497695853,
+          "per_label": {
+            "high": {
+              "f1": 0.7281105990783411,
+              "fn": 59,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.572463768115942,
+              "tp": 79
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 23
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 59,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.6335403726708074,
+          "f1": 0.7756653992395437,
+          "fn": 59,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.6335403726708074,
+          "tp": 102
+        }
+      }
+    }
+  },
+  "messages": [],
+  "shortcut_views": {
+    "seen_test_contract_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.2357142857142857,
+          "macro_f1": 0.0953757225433526,
+          "per_label": {
+            "high": {
+              "f1": 0.0,
+              "fn": 400,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.3815028901734104,
+              "fn": 0,
+              "fp": 535,
+              "precision": 0.2357142857142857,
+              "recall": 1.0,
+              "tp": 165
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.2357142857142857,
+          "f1": 0.0,
+          "fn": 535,
+          "fp": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0
+        }
+      }
+    },
+    "seen_test_family_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.2357142857142857,
+          "macro_f1": 0.0953757225433526,
+          "per_label": {
+            "high": {
+              "f1": 0.0,
+              "fn": 400,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.3815028901734104,
+              "fn": 0,
+              "fp": 535,
+              "precision": 0.2357142857142857,
+              "recall": 1.0,
+              "tp": 165
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.2357142857142857,
+          "f1": 0.0,
+          "fn": 535,
+          "fp": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0
+        }
+      }
+    },
+    "seen_test_no_constraints": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8507546417776597,
+          "macro_precision": 0.9,
+          "macro_recall": 0.816434803909147,
+          "micro_f1": 0.8883374689826303,
+          "micro_precision": 1.0,
+          "micro_recall": 0.7991071428571429,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 72
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 46
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "wrong_type": {
+              "f1": 0.8727272727272727,
+              "fn": 14,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7741935483870968,
+              "tp": 48
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.19270833333333334,
+        "critical_semantic_error_miss_rate_high_severity": 0.19270833333333334,
+        "exact_match_label_set_accuracy": 0.8157142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.8782730483497746,
+          "micro_f1": 0.8933717579250721,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8828571428571429,
+          "macro_f1": 0.6652446913925241,
+          "per_label": {
+            "high": {
+              "f1": 0.8995873452544705,
+              "fn": 73,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8175,
+              "tp": 327
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.9545454545454545,
+              "fn": 9,
+              "fp": 3,
+              "precision": 0.9767441860465116,
+              "recall": 0.9333333333333333,
+              "tp": 126
+            },
+            "none": {
+              "f1": 0.8068459657701712,
+              "fn": 0,
+              "fp": 79,
+              "precision": 0.6762295081967213,
+              "recall": 1.0,
+              "tp": 165
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.8871428571428571,
+          "f1": 0.9202825428859738,
+          "fn": 79,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.8523364485981308,
+          "tp": 456
+        }
+      }
+    },
+    "seen_test_request_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8507546417776597,
+          "macro_precision": 0.9,
+          "macro_recall": 0.816434803909147,
+          "micro_f1": 0.8883374689826303,
+          "micro_precision": 1.0,
+          "micro_recall": 0.7991071428571429,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 72
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 46
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "wrong_type": {
+              "f1": 0.8727272727272727,
+              "fn": 14,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7741935483870968,
+              "tp": 48
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.19270833333333334,
+        "critical_semantic_error_miss_rate_high_severity": 0.19270833333333334,
+        "exact_match_label_set_accuracy": 0.8157142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.8782730483497746,
+          "micro_f1": 0.8933717579250721,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8828571428571429,
+          "macro_f1": 0.6652446913925241,
+          "per_label": {
+            "high": {
+              "f1": 0.8995873452544705,
+              "fn": 73,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8175,
+              "tp": 327
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.9545454545454545,
+              "fn": 9,
+              "fp": 3,
+              "precision": 0.9767441860465116,
+              "recall": 0.9333333333333333,
+              "tp": 126
+            },
+            "none": {
+              "f1": 0.8068459657701712,
+              "fn": 0,
+              "fp": 79,
+              "precision": 0.6762295081967213,
+              "recall": 1.0,
+              "tp": 165
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.8871428571428571,
+          "f1": 0.9202825428859738,
+          "fn": 79,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.8523364485981308,
+          "tp": 456
+        }
+      }
+    },
+    "unseen_family_test_contract_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.27714285714285714,
+          "macro_f1": 0.10850111856823266,
+          "per_label": {
+            "high": {
+              "f1": 0.0,
+              "fn": 368,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.43400447427293065,
+              "fn": 0,
+              "fp": 506,
+              "precision": 0.27714285714285714,
+              "recall": 1.0,
+              "tp": 194
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.27714285714285714,
+          "f1": 0.0,
+          "fn": 506,
+          "fp": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0
+        }
+      }
+    },
+    "unseen_family_test_family_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.27714285714285714,
+          "macro_f1": 0.10850111856823266,
+          "per_label": {
+            "high": {
+              "f1": 0.0,
+              "fn": 368,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.43400447427293065,
+              "fn": 0,
+              "fp": 506,
+              "precision": 0.27714285714285714,
+              "recall": 1.0,
+              "tp": 194
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.27714285714285714,
+          "f1": 0.0,
+          "fn": 506,
+          "fp": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0
+        }
+      }
+    },
+    "unseen_family_test_no_constraints": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8699999999999999,
+          "macro_precision": 0.9,
+          "macro_recall": 0.8538461538461538,
+          "micro_f1": 0.907861369399831,
+          "micro_precision": 1.0,
+          "micro_recall": 0.8312693498452013,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 78
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 37
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "wrong_type": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 65
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.15384615384615385,
+        "critical_semantic_error_miss_rate_high_severity": 0.15384615384615385,
+        "exact_match_label_set_accuracy": 0.8514285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.9,
+          "micro_f1": 0.9166666666666666,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9157142857142857,
+          "macro_f1": 0.6952149402383856,
+          "per_label": {
+            "high": {
+              "f1": 0.912850812407681,
+              "fn": 59,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8396739130434783,
+              "tp": 309
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "none": {
+              "f1": 0.8680089485458613,
+              "fn": 0,
+              "fp": 59,
+              "precision": 0.766798418972332,
+              "recall": 1.0,
+              "tp": 194
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.9157142857142857,
+          "f1": 0.938090241343127,
+          "fn": 59,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.883399209486166,
+          "tp": 447
+        }
+      }
+    },
+    "unseen_family_test_request_only": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8699999999999999,
+          "macro_precision": 0.9,
+          "macro_recall": 0.8538461538461538,
+          "micro_f1": 0.907861369399831,
+          "micro_precision": 1.0,
+          "micro_recall": 0.8312693498452013,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 78
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 37
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "wrong_type": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 65
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.15384615384615385,
+        "critical_semantic_error_miss_rate_high_severity": 0.15384615384615385,
+        "exact_match_label_set_accuracy": 0.8514285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.9,
+          "micro_f1": 0.9166666666666666,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9157142857142857,
+          "macro_f1": 0.6952149402383856,
+          "per_label": {
+            "high": {
+              "f1": 0.912850812407681,
+              "fn": 59,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8396739130434783,
+              "tp": 309
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "none": {
+              "f1": 0.8680089485458613,
+              "fn": 0,
+              "fp": 59,
+              "precision": 0.766798418972332,
+              "recall": 1.0,
+              "tp": 194
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.9157142857142857,
+          "f1": 0.938090241343127,
+          "fn": 59,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.883399209486166,
+          "tp": 447
+        }
+      }
+    }
+  },
+  "splits": {
+    "seen_test": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "majority_empty": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "majority_frequent": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 72,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 46,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 76,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 62,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.2357142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 57,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 67,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 68,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5714285714285714,
+          "macro_f1": 0.18181818181818182,
+          "per_label": {
+            "high": {
+              "f1": 0.7272727272727273,
+              "fn": 0,
+              "fp": 300,
+              "precision": 0.5714285714285714,
+              "recall": 1.0,
+              "tp": 400
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 135,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 165,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7642857142857142,
+          "f1": 0.8663967611336032,
+          "fn": 0,
+          "fp": 165,
+          "precision": 0.7642857142857142,
+          "recall": 1.0,
+          "tp": 535
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8507546417776597,
+          "macro_precision": 0.9,
+          "macro_recall": 0.816434803909147,
+          "micro_f1": 0.8883374689826303,
+          "micro_precision": 1.0,
+          "micro_recall": 0.7991071428571429,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 72
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 84,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 46
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 76
+            },
+            "wrong_type": {
+              "f1": 0.8727272727272727,
+              "fn": 14,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7741935483870968,
+              "tp": 48
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.19270833333333334,
+        "critical_semantic_error_miss_rate_high_severity": 0.19270833333333334,
+        "exact_match_label_set_accuracy": 0.8157142857142857,
+        "semantic_labels": {
+          "macro_f1": 0.8782730483497746,
+          "micro_f1": 0.8933717579250721,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.7608695652173912,
+              "fn": 22,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.6140350877192983,
+              "tp": 35
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8739495798319328,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7761194029850746,
+              "tp": 52
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 68
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.8828571428571429,
+          "macro_f1": 0.6652446913925241,
+          "per_label": {
+            "high": {
+              "f1": 0.8995873452544705,
+              "fn": 73,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8175,
+              "tp": 327
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.9545454545454545,
+              "fn": 9,
+              "fp": 3,
+              "precision": 0.9767441860465116,
+              "recall": 0.9333333333333333,
+              "tp": 126
+            },
+            "none": {
+              "f1": 0.8068459657701712,
+              "fn": 0,
+              "fp": 79,
+              "precision": 0.6762295081967213,
+              "recall": 1.0,
+              "tp": 165
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.8871428571428571,
+          "f1": 0.9202825428859738,
+          "fn": 79,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.8523364485981308,
+          "tp": 456
+        }
+      }
+    },
+    "unseen_family_test": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "majority_empty": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "majority_frequent": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 78,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 37,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.27714285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 66,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 65,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 64,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.5257142857142857,
+          "macro_f1": 0.17228464419475653,
+          "per_label": {
+            "high": {
+              "f1": 0.6891385767790261,
+              "fn": 0,
+              "fp": 332,
+              "precision": 0.5257142857142857,
+              "recall": 1.0,
+              "tp": 368
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 138,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 194,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.7228571428571429,
+          "f1": 0.8391376451077943,
+          "fn": 0,
+          "fp": 194,
+          "precision": 0.7228571428571429,
+          "recall": 1.0,
+          "tp": 506
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8699999999999999,
+          "macro_precision": 0.9,
+          "macro_recall": 0.8538461538461538,
+          "micro_f1": 0.907861369399831,
+          "micro_precision": 1.0,
+          "micro_recall": 0.8312693498452013,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 78
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 79,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 37
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            },
+            "wrong_type": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 65
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.15384615384615385,
+        "critical_semantic_error_miss_rate_high_severity": 0.15384615384615385,
+        "exact_match_label_set_accuracy": 0.8514285714285714,
+        "semantic_labels": {
+          "macro_f1": 0.9,
+          "micro_f1": 0.9166666666666666,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 66
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.7000000000000001,
+              "fn": 30,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.5384615384615384,
+              "tp": 35
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 64
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9157142857142857,
+          "macro_f1": 0.6952149402383856,
+          "per_label": {
+            "high": {
+              "f1": 0.912850812407681,
+              "fn": 59,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8396739130434783,
+              "tp": 309
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 138
+            },
+            "none": {
+              "f1": 0.8680089485458613,
+              "fn": 0,
+              "fp": 59,
+              "precision": 0.766798418972332,
+              "recall": 1.0,
+              "tp": 194
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.9157142857142857,
+          "f1": 0.938090241343127,
+          "fn": 59,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.883399209486166,
+          "tp": 447
+        }
+      }
+    },
+    "validation": {
+      "family_frequency": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 33,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 49,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.256,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.554,
+          "macro_f1": 0.17824967824967827,
+          "per_label": {
+            "high": {
+              "f1": 0.7129987129987131,
+              "fn": 0,
+              "fp": 223,
+              "precision": 0.554,
+              "recall": 1.0,
+              "tp": 277
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 95,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 128,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.744,
+          "f1": 0.8532110091743119,
+          "fn": 0,
+          "fp": 128,
+          "precision": 0.744,
+          "recall": 1.0,
+          "tp": 372
+        }
+      },
+      "majority_empty": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 33,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 49,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.256,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.554,
+          "macro_f1": 0.17824967824967827,
+          "per_label": {
+            "high": {
+              "f1": 0.7129987129987131,
+              "fn": 0,
+              "fp": 223,
+              "precision": 0.554,
+              "recall": 1.0,
+              "tp": 277
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 95,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 128,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.744,
+          "f1": 0.8532110091743119,
+          "fn": 0,
+          "fp": 128,
+          "precision": 0.744,
+          "recall": 1.0,
+          "tp": 372
+        }
+      },
+      "majority_frequent": {
+        "all_labels": {
+          "macro_f1": 0.0,
+          "macro_precision": 0.0,
+          "macro_recall": 0.0,
+          "micro_f1": 0.0,
+          "micro_precision": 0.0,
+          "micro_recall": 0.0,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "malformed_url": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_authentication": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 0.0,
+              "fn": 33,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_http_method": {
+              "f1": 0.0,
+              "fn": 49,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "wrong_type": {
+              "f1": 0.0,
+              "fn": 47,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 1.0,
+        "critical_semantic_error_miss_rate_high_severity": 1.0,
+        "exact_match_label_set_accuracy": 0.256,
+        "semantic_labels": {
+          "macro_f1": 0.0,
+          "micro_f1": 0.0,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.0,
+              "fn": 51,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.0,
+              "fn": 42,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_state_violation": {
+              "f1": 0.0,
+              "fn": 48,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.554,
+          "macro_f1": 0.17824967824967827,
+          "per_label": {
+            "high": {
+              "f1": 0.7129987129987131,
+              "fn": 0,
+              "fp": 223,
+              "precision": 0.554,
+              "recall": 1.0,
+              "tp": 277
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.0,
+              "fn": 95,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "none": {
+              "f1": 0.0,
+              "fn": 128,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.744,
+          "f1": 0.8532110091743119,
+          "fn": 0,
+          "fp": 128,
+          "precision": 0.744,
+          "recall": 1.0,
+          "tp": 372
+        }
+      },
+      "visible_rule_based": {
+        "all_labels": {
+          "macro_f1": 0.8589792928519888,
+          "macro_precision": 0.9,
+          "macro_recall": 0.8281363609273497,
+          "micro_f1": 0.9,
+          "micro_precision": 1.0,
+          "micro_recall": 0.8181818181818182,
+          "per_label": {
+            "invalid_value_range": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 47
+            },
+            "malformed_url": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 52
+            },
+            "missing_authentication": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 52
+            },
+            "missing_required_field": {
+              "f1": 0.0,
+              "fn": 52,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "semantic_cross_field_violation": {
+              "f1": 0.8275862068965517,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7058823529411765,
+              "tp": 36
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8947368421052632,
+              "fn": 8,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8095238095238095,
+              "tp": 34
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 48
+            },
+            "unexpected_or_malformed_body_structure": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 33
+            },
+            "wrong_http_method": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 49
+            },
+            "wrong_type": {
+              "f1": 0.8674698795180723,
+              "fn": 11,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7659574468085106,
+              "tp": 36
+            }
+          }
+        },
+        "critical_semantic_error_miss_rate": 0.16312056737588654,
+        "critical_semantic_error_miss_rate_high_severity": 0.16312056737588654,
+        "exact_match_label_set_accuracy": 0.836,
+        "semantic_labels": {
+          "macro_f1": 0.9074410163339383,
+          "micro_f1": 0.9111969111969112,
+          "per_label": {
+            "semantic_cross_field_violation": {
+              "f1": 0.8275862068965517,
+              "fn": 15,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.7058823529411765,
+              "tp": 36
+            },
+            "semantic_domain_constraint_violation": {
+              "f1": 0.8947368421052632,
+              "fn": 8,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8095238095238095,
+              "tp": 34
+            },
+            "semantic_state_violation": {
+              "f1": 1.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "tp": 48
+            }
+          }
+        },
+        "severity_bucket": {
+          "accuracy": 0.9,
+          "macro_f1": 0.6779293183602931,
+          "per_label": {
+            "high": {
+              "f1": 0.9158512720156556,
+              "fn": 43,
+              "fp": 0,
+              "precision": 1.0,
+              "recall": 0.8447653429602888,
+              "tp": 234
+            },
+            "low": {
+              "f1": 0.0,
+              "fn": 0,
+              "fp": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "tp": 0
+            },
+            "medium": {
+              "f1": 0.9565217391304348,
+              "fn": 7,
+              "fp": 1,
+              "precision": 0.9887640449438202,
+              "recall": 0.9263157894736842,
+              "tp": 88
+            },
+            "none": {
+              "f1": 0.839344262295082,
+              "fn": 0,
+              "fp": 49,
+              "precision": 0.7231638418079096,
+              "recall": 1.0,
+              "tp": 128
+            }
+          }
+        },
+        "validity": {
+          "accuracy": 0.902,
+          "f1": 0.9294964028776979,
+          "fn": 49,
+          "fp": 0,
+          "precision": 1.0,
+          "recall": 0.8682795698924731,
+          "tp": 323
+        }
+      }
+    }
+  }
+}
