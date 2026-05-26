@@ -11,8 +11,10 @@ dev = [
     "pytest>=8.0",
 ]
 train = [
+    "accelerate>=1.1",
     "datasets>=2.19",
     "scikit-learn>=1.4",
+    "torch>=2.4",
     "transformers>=4.40",
 ]
 

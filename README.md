@@ -211,6 +211,24 @@ Optional training dependencies can be installed with:
 python3 -m pip install -e ".[train]"
 ```
 
+### Stage 6B: Tiny Smoke Training
+
+This is only a pipeline smoke test. It is not the final reported model, and final training should be run later on a GPU/Colab or stronger environment. Outputs are intentionally ignored by git.
+
+```bash
+python3 scripts/train_distilbert.py \
+  --train data/generated/final_train.jsonl \
+  --validation data/generated/final_validation.jsonl \
+  --model-name distilbert-base-uncased \
+  --output-dir outputs/distilbert_smoke \
+  --epochs 1 \
+  --batch-size 4 \
+  --max-length 256 \
+  --max-train-examples 32 \
+  --max-validation-examples 16 \
+  --dry-run false
+```
+
 ## Documentation
 
 See `docs/` for stage summaries and `docs/results/` for checked-in baseline and contract-dependence reports.
