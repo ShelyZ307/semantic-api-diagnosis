@@ -11,14 +11,17 @@ from pathlib import Path
 from semantic_api_diagnosis.training.data import build_training_records
 from semantic_api_diagnosis.training.labels import ERROR_LABELS
 from semantic_api_diagnosis.training.metrics import compute_multilabel_metrics
-from semantic_api_diagnosis.training.modeling import build_sequence_classifier
+from semantic_api_diagnosis.training.modeling import build_pos_weighted_trainer_class, build_sequence_classifier
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Fine-tune DistilBERT for multi-label API error diagnosis.")
+def main(
+    default_model_name: str = "distilbert-base-uncased",
+    model_label: str = "DistilBERT",
+) -> None:
+    parser = argparse.ArgumentParser(description=f"Fine-tune {model_label} for multi-label API error diagnosis.")
     parser.add_argument("--train", required=True)
     parser.add_argument("--validation", required=True)
-    parser.add_argument("--model-name", default="distilbert-base-uncased")
+    parser.add_argument("--model-name", default=default_model_name)
     parser.add_argument("--output-dir", default="outputs/distilbert_stage6")
     parser.add_argument("--epochs", type=float, default=1)
     parser.add_argument("--batch-size", type=int, default=8)
@@ -33,11 +36,12 @@ def main() -> None:
     parser.add_argument("--eval-strategy", default="epoch")
     parser.add_argument("--save-strategy", default="no")
     parser.add_argument("--save-final-model", choices=["true", "false"], default="false")
+    parser.add_argument("--loss-mode", choices=["unweighted", "pos_weighted"], default="unweighted")
     args = parser.parse_args()
 
     train_records = limit_records(build_training_records(args.train), args.max_train_examples)
     validation_records = limit_records(build_training_records(args.validation), args.max_validation_examples)
-    _print_run_config(args, train_records, validation_records)
+    _print_run_config(args, train_records, validation_records, model_label)
     if args.dry_run == "true":
         _dry_run(args, train_records, validation_records)
         return
@@ -56,7 +60,7 @@ def _dry_run(args: argparse.Namespace, train_records: list[dict], validation_rec
 def _train(args: argparse.Namespace, train_records: list[dict], validation_records: list[dict]) -> None:
     try:
         from datasets import Dataset
-        from transformers import AutoTokenizer, Trainer, TrainingArguments
+        from transformers import AutoTokenizer, DataCollatorWithPadding, Trainer, TrainingArguments
     except ImportError as exc:
         raise ImportError(
             "Full training requires optional dependencies. Install with: "
@@ -77,27 +81,49 @@ def _train(args: argparse.Namespace, train_records: list[dict], validation_recor
     )
     model = build_sequence_classifier(args.model_name, num_labels=len(ERROR_LABELS))
     training_args = _build_training_arguments(TrainingArguments, args, output_dir)
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
+    pos_weights = compute_positive_class_weights(train_records) if args.loss_mode == "pos_weighted" else None
+    trainer_cls = build_pos_weighted_trainer_class() if pos_weights is not None else Trainer
     trainer = _build_trainer(
-        Trainer,
+        trainer_cls,
         model=model,
         training_args=training_args,
         train_dataset=train_dataset,
         validation_dataset=validation_dataset,
         tokenizer=tokenizer,
+        data_collator=data_collator,
+        pos_weights=pos_weights,
     )
     trainer.train()
     metrics = trainer.evaluate()
     if args.save_final_model == "true":
-        trainer.save_model(str(output_dir / "model"))
+        model_dir = output_dir / "model"
+        trainer.save_model(str(model_dir))
+        tokenizer.save_pretrained(str(model_dir))
     else:
         print("Skipping final model save because --save-final-model is false.")
     (output_dir / "metrics.json").write_text(json.dumps(metrics, indent=2, sort_keys=True), encoding="utf-8")
+    (output_dir / "training_config.json").write_text(
+        json.dumps(
+            {
+                "loss_mode": args.loss_mode,
+                "positive_class_weights": pos_weights,
+                "seed": args.seed,
+                "max_length": args.max_length,
+                "batch_size": args.batch_size,
+                "epochs": args.epochs,
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
     print(f"Training complete. Metrics written to {output_dir / 'metrics.json'}")
 
 
 def _tokenize_batch(tokenizer, batch: dict, max_length: int) -> dict:
-    tokenized = tokenizer(batch["text"], truncation=True, padding="max_length", max_length=max_length)
+    tokenized = tokenizer(batch["text"], truncation=True, max_length=max_length)
     tokenized["labels"] = [[float(value) for value in labels] for labels in batch["labels"]]
     return tokenized
 
@@ -135,9 +161,14 @@ def limit_records(records: list[dict], max_examples: int | None) -> list[dict]:
     return records[:max_examples]
 
 
-def _print_run_config(args: argparse.Namespace, train_records: list[dict], validation_records: list[dict]) -> None:
+def _print_run_config(
+    args: argparse.Namespace,
+    train_records: list[dict],
+    validation_records: list[dict],
+    model_label: str = "DistilBERT",
+) -> None:
     mode = "dry-run" if args.dry_run == "true" else "real training"
-    print(f"DistilBERT training mode: {mode}")
+    print(f"{model_label} training mode: {mode}")
     print(f"Model name: {args.model_name}")
     print(f"Train records: {len(train_records)}")
     print(f"Validation records: {len(validation_records)}")
@@ -149,6 +180,7 @@ def _print_run_config(args: argparse.Namespace, train_records: list[dict], valid
     print(f"Output dir: {args.output_dir}")
     print(f"Eval strategy: {args.eval_strategy}")
     print(f"Save strategy: {args.save_strategy}")
+    print(f"Loss mode: {args.loss_mode}")
 
 
 def _build_training_arguments(training_arguments_cls, args: argparse.Namespace, output_dir: Path):
@@ -172,7 +204,16 @@ def _build_training_arguments(training_arguments_cls, args: argparse.Namespace, 
     return training_arguments_cls(**kwargs)
 
 
-def _build_trainer(trainer_cls, model, training_args, train_dataset, validation_dataset, tokenizer):
+def _build_trainer(
+    trainer_cls,
+    model,
+    training_args,
+    train_dataset,
+    validation_dataset,
+    tokenizer,
+    data_collator=None,
+    pos_weights=None,
+):
     kwargs = {
         "model": model,
         "args": training_args,
@@ -180,6 +221,10 @@ def _build_trainer(trainer_cls, model, training_args, train_dataset, validation_
         "eval_dataset": validation_dataset,
         "compute_metrics": _trainer_metrics,
     }
+    if data_collator is not None:
+        kwargs["data_collator"] = data_collator
+    if pos_weights is not None:
+        kwargs["pos_weights"] = pos_weights
     parameters = signature(trainer_cls.__init__).parameters
     if "processing_class" in parameters:
         kwargs["processing_class"] = tokenizer
@@ -205,6 +250,21 @@ def _label_counts(records: list[dict]) -> dict[str, int]:
             if value:
                 counts[label] += 1
     return {label: counts[label] for label in ERROR_LABELS}
+
+
+def compute_positive_class_weights(records: list[dict]) -> list[float]:
+    """Compute neg/pos weights from the training split only."""
+    if not records:
+        raise ValueError("cannot compute positive-class weights from an empty training split")
+    positives = [0] * len(ERROR_LABELS)
+    for record in records:
+        for index, value in enumerate(record["labels"]):
+            positives[index] += int(bool(value))
+    if any(count == 0 for count in positives):
+        missing = [label for label, count in zip(ERROR_LABELS, positives) if count == 0]
+        raise ValueError(f"cannot weight labels with no positive training examples: {missing}")
+    total = len(records)
+    return [(total - count) / count for count in positives]
 
 
 def _verify_tokenizer_if_available(model_name: str, max_length: int, sample_records: list[dict]) -> None:

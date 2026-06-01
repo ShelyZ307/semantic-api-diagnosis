@@ -107,7 +107,7 @@ def _resolve_shortcut_paths(args) -> dict[str, Path]:
     )
     unseen_paths = _ensure_shortcuts(
         args.unseen_test,
-        Path(args.unseen_test).parent / "shortcut_views_final_unseen_test",
+        Path(args.unseen_test).parent / "shortcut_views_final_unseen_family_test",
         {
             "request_only": args.unseen_test_request_only,
             "contract_only": args.unseen_test_contract_only,

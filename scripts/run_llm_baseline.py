@@ -2,6 +2,7 @@
 """Run zero-shot or few-shot LLM baselines on a JSONL sample."""
 
 from argparse import ArgumentParser
+import os
 from random import Random
 from pathlib import Path
 import sys
@@ -25,13 +26,21 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=201)
     parser.add_argument("--dry-run", choices=["true", "false"], default="false")
     parser.add_argument("--print-first-prompt", choices=["true", "false"], default="false")
+    parser.add_argument("--timeout", type=float, default=60.0)
     args = parser.parse_args()
 
     rows = _sample(read_jsonl(args.input), args.sample_size, args.seed)
     train_rows = read_jsonl(args.train) if args.train else []
     if args.mode == "few_shot" and not train_rows:
         parser.error("--train is required for few_shot mode")
-    runner = LLMRunner(provider=args.provider, model=args.model, dry_run=args.dry_run == "true")
+    if args.provider == "openai" and not os.environ.get("OPENAI_API_KEY"):
+        parser.error("OPENAI_API_KEY must be set for provider=openai")
+    runner = LLMRunner(
+        provider=args.provider,
+        model=args.model,
+        dry_run=args.dry_run == "true",
+        timeout=args.timeout,
+    )
     outputs = []
     for example in rows:
         prompt = (
@@ -41,17 +50,29 @@ def main() -> None:
         )
         if args.print_first_prompt == "true" and not outputs:
             print(prompt)
-        response = runner.run(prompt)
+        try:
+            response = runner.run(prompt)
+        except Exception as error:  # Continue the controlled sample and preserve failures for audit.
+            response = {
+                "raw_response": "",
+                "parsed_prediction": None,
+                "parse_error": None,
+                "transport_error": f"{type(error).__name__}: {error}",
+            }
         outputs.append(
             {
                 "id": example["id"],
-                "source_split": example.get("split"),
+                "stage8_id": example.get("stage8_id"),
+                "source_split": example.get("sample_group") or example.get("split"),
                 "endpoint_family": example.get("endpoint_family"),
                 "prompt": prompt,
                 "raw_response": response["raw_response"],
                 "parsed_prediction": response["parsed_prediction"],
                 "gold": example["target"],
                 "parse_error": response["parse_error"],
+                "transport_error": response.get("transport_error"),
+                "provider_response_id": response.get("provider_response_id"),
+                "usage": response.get("usage"),
             }
         )
     write_jsonl(outputs, args.output)

@@ -11,8 +11,11 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from semantic_api_diagnosis.training.data import get_error_labels, get_serialized_input, load_jsonl
-from semantic_api_diagnosis.training.labels import ERROR_LABELS, labels_to_multihot, multihot_to_labels
-from semantic_api_diagnosis.training.metrics import compute_multilabel_metrics
+from semantic_api_diagnosis.training.evaluation import (
+    add_thresholded_prediction,
+    compute_metrics_for_prediction_rows,
+)
+from semantic_api_diagnosis.training.labels import ERROR_LABELS
 from semantic_api_diagnosis.serialization.jsonl import write_jsonl
 
 
@@ -22,9 +25,11 @@ def main() -> None:
     parser.add_argument("--input-jsonl", required=True)
     parser.add_argument("--output-jsonl", required=True)
     parser.add_argument("--threshold", type=float, default=0.5)
+    parser.add_argument("--thresholds-json")
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--max-length", type=int, default=512)
     args = parser.parse_args()
+    thresholds = _load_thresholds(args.thresholds_json) if args.thresholds_json else args.threshold
 
     model_dir = Path(args.model_dir)
     _validate_model_dir(model_dir)
@@ -32,14 +37,14 @@ def main() -> None:
     predictions = predict_examples(
         model_dir=model_dir,
         examples=examples,
-        threshold=args.threshold,
         batch_size=args.batch_size,
         max_length=args.max_length,
     )
+    predictions = [add_thresholded_prediction(row, thresholds) for row in predictions]
     output_path = Path(args.output_jsonl)
     write_jsonl(predictions, output_path)
     if _all_have_gold(examples):
-        metrics = compute_metrics_for_prediction_rows(predictions, threshold=args.threshold)
+        metrics = compute_metrics_for_prediction_rows(predictions, thresholds=thresholds)
         metrics_path = output_path.with_suffix(".metrics.json")
         metrics_path.write_text(json.dumps(metrics, indent=2, sort_keys=True), encoding="utf-8")
         print(f"Wrote metrics to {metrics_path}")
@@ -49,7 +54,6 @@ def main() -> None:
 def predict_examples(
     model_dir: Path,
     examples: list[dict],
-    threshold: float,
     batch_size: int,
     max_length: int,
 ) -> list[dict]:
@@ -64,6 +68,8 @@ def predict_examples(
 
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
     model = AutoModelForSequenceClassification.from_pretrained(model_dir)
+    device = _device(torch)
+    model.to(device)
     model.eval()
     rows = []
     with torch.no_grad():
@@ -71,29 +77,27 @@ def predict_examples(
             batch = examples[start : start + batch_size]
             texts = [get_serialized_input(example) for example in batch]
             encoded = tokenizer(texts, truncation=True, padding=True, max_length=max_length, return_tensors="pt")
+            encoded = {name: tensor.to(device) for name, tensor in encoded.items()}
             outputs = model(**encoded)
             probabilities = torch.sigmoid(outputs.logits).cpu().tolist()
             for example, scores in zip(batch, probabilities):
-                rows.append(format_prediction_row(example, scores, threshold))
+                rows.append(format_prediction_row(example, scores))
     return rows
 
 
-def format_prediction_row(example: dict, scores: list[float], threshold: float) -> dict:
+def format_prediction_row(example: dict, scores: list[float], threshold: float | None = None) -> dict:
     if len(scores) != len(ERROR_LABELS):
         raise ValueError(f"Expected {len(ERROR_LABELS)} scores, got {len(scores)}")
-    gold_labels = get_error_labels(example) if _has_gold(example) else []
-    return {
+    gold_target = _gold_target(example) if _has_gold(example) else None
+    row = {
         "id": example.get("id"),
-        "gold_error_labels": gold_labels,
-        "predicted_error_labels": multihot_to_labels(scores, threshold=threshold),
+        "source_split": example.get("split"),
+        "endpoint_family": example.get("endpoint_family"),
+        "gold_target": gold_target,
+        "gold_error_labels": gold_target["error_labels"] if gold_target else [],
         "scores": {label: float(score) for label, score in zip(ERROR_LABELS, scores)},
     }
-
-
-def compute_metrics_for_prediction_rows(rows: list[dict], threshold: float = 0.5) -> dict:
-    y_true = [labels_to_multihot(row["gold_error_labels"]) for row in rows]
-    y_pred = [[row["scores"][label] for label in ERROR_LABELS] for row in rows]
-    return compute_multilabel_metrics(y_true, y_pred, threshold=threshold)
+    return add_thresholded_prediction(row, threshold) if threshold is not None else row
 
 
 def _validate_model_dir(model_dir: Path) -> None:
@@ -117,6 +121,33 @@ def _has_gold(example: dict) -> bool:
 
 def _all_have_gold(examples: list[dict]) -> bool:
     return all(_has_gold(example) for example in examples)
+
+
+def _gold_target(example: dict) -> dict:
+    target = example.get("target", {})
+    labels = get_error_labels(example)
+    return {
+        "error_labels": labels,
+        "validity": target.get("validity", "invalid" if labels else "valid"),
+        "severity_bucket": target.get("severity_bucket", "high" if labels else "none"),
+    }
+
+
+def _load_thresholds(path: str) -> dict[str, float]:
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    thresholds = payload.get("thresholds", payload)
+    missing = [label for label in ERROR_LABELS if label not in thresholds]
+    if missing:
+        raise ValueError(f"Threshold file is missing labels: {', '.join(missing)}")
+    return {label: float(thresholds[label]) for label in ERROR_LABELS}
+
+
+def _device(torch):
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
 if __name__ == "__main__":

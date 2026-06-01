@@ -10,7 +10,7 @@ from semantic_api_diagnosis.llm_baselines.prompts import (
     build_zero_shot_prompt,
     select_few_shot_examples,
 )
-from semantic_api_diagnosis.llm_baselines.runner import LLMRunner
+from semantic_api_diagnosis.llm_baselines.runner import LLMRunner, _response_output_text
 from semantic_api_diagnosis.serialization.jsonl import read_jsonl, write_jsonl
 
 
@@ -64,6 +64,52 @@ def test_mock_runner_returns_parseable_json() -> None:
     assert "missing_authentication" in result["parsed_prediction"]["error_labels"]
 
 
+def test_openai_response_output_text_extracts_structured_output() -> None:
+    body = {
+        "output": [
+            {
+                "content": [
+                    {
+                        "type": "output_text",
+                        "text": '{"validity":"valid","error_labels":[],"severity_bucket":"none"}',
+                    }
+                ]
+            }
+        ]
+    }
+
+    assert _response_output_text(body).startswith('{"validity"')
+
+
+def test_openai_runner_requests_strict_structured_output(monkeypatch) -> None:
+    captured = {}
+
+    class Response:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return {
+                "id": "resp_test",
+                "output_text": '{"validity":"valid","error_labels":[],"severity_bucket":"none"}',
+                "usage": {"input_tokens": 10, "output_tokens": 5},
+            }
+
+    def fake_post(url, headers, json, timeout):
+        captured.update({"url": url, "headers": headers, "json": json, "timeout": timeout})
+        return Response()
+
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    monkeypatch.setattr("httpx.post", fake_post)
+
+    result = LLMRunner(provider="openai", model="gpt-4o-mini").run("prompt")
+
+    assert result["parsed_prediction"]["validity"] == "valid"
+    assert captured["url"] == "https://api.openai.com/v1/responses"
+    assert captured["json"]["text"]["format"]["type"] == "json_schema"
+    assert captured["json"]["text"]["format"]["strict"] is True
+
+
 def test_run_llm_baseline_script_mock_mode_on_tiny_file(tmp_path) -> None:
     input_path = tmp_path / "input.jsonl"
     output_path = tmp_path / "predictions.jsonl"
@@ -114,6 +160,7 @@ def test_evaluate_llm_predictions_reports_parse_error_rate(tmp_path) -> None:
                 "parsed_prediction": None,
                 "gold": example["target"],
                 "parse_error": "bad json",
+                "transport_error": "provider unavailable",
             }
         ],
         prediction_path,
@@ -136,4 +183,6 @@ def test_evaluate_llm_predictions_reports_parse_error_rate(tmp_path) -> None:
 
     results = json.loads(output_path.read_text(encoding="utf-8"))
     assert results["parse_error_rate"] == 1.0
+    assert results["invalid_json_rate"] == 0.0
+    assert results["transport_error_rate"] == 1.0
     assert output_path.with_suffix(".md").exists()

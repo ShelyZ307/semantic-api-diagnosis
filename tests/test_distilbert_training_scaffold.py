@@ -4,7 +4,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from semantic_api_diagnosis.training.train_distilbert import limit_records, _build_training_arguments
+from semantic_api_diagnosis.training.train_distilbert import (
+    _build_training_arguments,
+    compute_positive_class_weights,
+    limit_records,
+)
 
 
 def test_limit_records_uses_deterministic_first_n() -> None:
@@ -48,6 +52,21 @@ def test_training_arguments_accept_stage_6b_options(tmp_path) -> None:
     assert built.values["output_dir"] == str(tmp_path)
     assert built.values["per_device_train_batch_size"] == 4
     assert built.values["eval_strategy"] == "epoch"
+
+
+def test_positive_class_weights_use_negative_to_positive_ratio() -> None:
+    records = [
+        {"labels": [1, 1] + [0] * 8},
+        {"labels": [1, 0] + [1] * 8},
+        {"labels": [0, 1] + [1] * 8},
+        {"labels": [0, 1] + [1] * 8},
+    ]
+
+    weights = compute_positive_class_weights(records)
+
+    assert weights[0] == 1.0
+    assert weights[1] == 1 / 3
+    assert weights[2:] == [1 / 3] * 8
 
 
 def test_prediction_row_formatting_and_metrics() -> None:

@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 from semantic_api_diagnosis.dataset_plan import implemented_seen_families, implemented_unseen_families
-from semantic_api_diagnosis.quality_gate import cross_split_leakage_report
+from semantic_api_diagnosis.quality_gate import cross_split_leakage_report, duplicate_report
 from semantic_api_diagnosis.serialization.jsonl import read_jsonl
 
 
@@ -61,3 +61,9 @@ def test_generate_final_dataset_script_creates_all_splits_with_strict_leakage_pa
     assert "near-duplicate serialized_input pairs across files >= 0.92: 0" in report
     assert "Wrote 100 examples" in result.stdout
 
+    train_duplicate_report = duplicate_report(
+        tmp_path / "final_train.jsonl",
+        output_path=tmp_path / "duplicate_report_final_train.txt",
+    )
+    assert "exact duplicate serialized_input count: 0" in train_duplicate_report
+    assert "near-duplicate serialized_input pairs >= 0.92: 0" in train_duplicate_report

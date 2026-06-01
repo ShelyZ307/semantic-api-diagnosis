@@ -11,7 +11,7 @@ SEMANTIC_LABELS = [
 ]
 
 
-def compute_multilabel_metrics(y_true, y_pred, threshold: float = 0.5) -> dict:
+def compute_multilabel_metrics(y_true, y_pred, threshold: float | list[float] = 0.5) -> dict:
     true_vectors = [_as_binary_vector(row, threshold=0.5) for row in y_true]
     pred_vectors = [_as_binary_vector(row, threshold=threshold) for row in y_pred]
     if len(true_vectors) != len(pred_vectors):
@@ -32,6 +32,7 @@ def compute_multilabel_metrics(y_true, y_pred, threshold: float = 0.5) -> dict:
         "micro_f1": sklearn_scores.get("micro_f1", _micro_f1(true_vectors, pred_vectors, range(len(ERROR_LABELS)))),
         "macro_f1": sklearn_scores.get("macro_f1", _mean([metrics["f1"] for metrics in per_label.values()])),
         "exact_match": _exact_match(true_vectors, pred_vectors),
+        "per_label": per_label,
         "per_label_f1": {label: metrics["f1"] for label, metrics in per_label.items()},
         "semantic_macro_f1": _mean([per_label[label]["f1"] for label in SEMANTIC_LABELS]),
         "semantic_micro_f1": _micro_f1(true_vectors, pred_vectors, semantic_indices),
@@ -39,8 +40,12 @@ def compute_multilabel_metrics(y_true, y_pred, threshold: float = 0.5) -> dict:
     }
 
 
-def _as_binary_vector(row, threshold: float) -> list[int]:
-    return [1 if float(value) >= threshold else 0 for value in list(row)]
+def _as_binary_vector(row, threshold: float | list[float]) -> list[int]:
+    values = list(row)
+    thresholds = [float(threshold)] * len(values) if isinstance(threshold, (int, float)) else list(threshold)
+    if len(values) != len(thresholds):
+        raise ValueError("threshold list must match vector length")
+    return [1 if float(value) >= float(cutoff) else 0 for value, cutoff in zip(values, thresholds)]
 
 
 def _sklearn_scores_if_available(y_true: list[list[int]], y_pred: list[list[int]]) -> dict:

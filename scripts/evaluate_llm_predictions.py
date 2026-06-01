@@ -26,10 +26,16 @@ def main() -> None:
     ]
     metrics = evaluate_predictions(gold, predictions)
     parse_errors = sum(1 for row in rows if row.get("parse_error"))
+    invalid_json = sum(1 for row in rows if _is_invalid_json(row.get("parse_error")))
+    transport_errors = sum(1 for row in rows if row.get("transport_error"))
     results = {
         "num_examples": len(rows),
         "parse_errors": parse_errors,
         "parse_error_rate": parse_errors / len(rows) if rows else 0.0,
+        "invalid_json": invalid_json,
+        "invalid_json_rate": invalid_json / len(rows) if rows else 0.0,
+        "transport_errors": transport_errors,
+        "transport_error_rate": transport_errors / len(rows) if rows else 0.0,
         "metrics": metrics,
     }
     output = Path(args.output)
@@ -52,6 +58,8 @@ def _markdown(results: dict) -> str:
             "",
             f"examples: {results['num_examples']}",
             f"parse_error_rate: {results['parse_error_rate']:.3f}",
+            f"invalid_json_rate: {results['invalid_json_rate']:.3f}",
+            f"transport_error_rate: {results['transport_error_rate']:.3f}",
             "",
             "| metric | value |",
             "|---|---:|",
@@ -69,6 +77,10 @@ def _markdown(results: dict) -> str:
 
 def _fmt(value: float | None) -> str:
     return "n/a" if value is None else f"{value:.3f}"
+
+
+def _is_invalid_json(parse_error: str | None) -> bool:
+    return bool(parse_error and "Expecting" in parse_error)
 
 
 if __name__ == "__main__":

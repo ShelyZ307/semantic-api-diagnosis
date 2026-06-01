@@ -28,8 +28,15 @@ def labels_to_multihot(labels: list[str]) -> list[int]:
     return vector
 
 
-def multihot_to_labels(vector, threshold: float = 0.5) -> list[str]:
+def multihot_to_labels(vector, threshold: float | list[float] = 0.5) -> list[str]:
     values = list(vector)
     if len(values) != len(ERROR_LABELS):
         raise ValueError(f"Expected vector of length {len(ERROR_LABELS)}, got {len(values)}")
-    return [label for label, value in zip(ERROR_LABELS, values) if float(value) >= threshold]
+    thresholds = [float(threshold)] * len(values) if isinstance(threshold, (int, float)) else list(threshold)
+    if len(thresholds) != len(values):
+        raise ValueError(f"Expected threshold vector of length {len(values)}, got {len(thresholds)}")
+    return [
+        label
+        for label, value, cutoff in zip(ERROR_LABELS, values, thresholds)
+        if float(value) >= float(cutoff)
+    ]

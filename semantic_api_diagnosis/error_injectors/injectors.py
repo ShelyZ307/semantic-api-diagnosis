@@ -3,6 +3,8 @@
 from copy import deepcopy
 from random import Random
 
+from semantic_api_diagnosis.contracts.policies import inject_policy_error
+
 
 STRUCTURAL_ERROR_LABELS = [
     "missing_required_field",
@@ -141,6 +143,8 @@ def inject_error(example: dict, label: str, rng: Random | None = None) -> dict:
         request["authentication"] = "missing"
     elif label == "unexpected_or_malformed_body_structure":
         _inject_malformed_body(request, mutated, rng)
+    elif inject_policy_error(mutated, label, rng):
+        pass
     elif family == "refunds_orders":
         _inject_refund_semantic_error(body, label)
     elif family == "booking_reservation":
@@ -192,7 +196,7 @@ def _inject_refund_semantic_error(body: dict, label: str) -> None:
     if label == "semantic_domain_constraint_violation":
         body["refund_amount"] = body["original_payment"] + 25.0
     elif label == "semantic_cross_field_violation":
-        body["order_id"] = f"{body['order_id']}_mismatch"
+        body["order_id"] = _different_identifier(body["order_id"], "ord")
     elif label == "semantic_state_violation":
         body["order_status"] = "pending"
 
@@ -229,7 +233,7 @@ def _inject_inventory_semantic_error(body: dict, label: str, rng: Random) -> Non
         return
     if label == "semantic_cross_field_violation":
         if rng.random() < 0.5:
-            body["body_product_id"] = f"{body['product_id']}_mismatch"
+            body["body_product_id"] = _different_identifier(body["product_id"], "prod")
         else:
             body["customer_region"] = "eu-west" if body["warehouse_region"] != "eu-west" else "us-east"
     elif label == "semantic_domain_constraint_violation":
@@ -244,7 +248,7 @@ def _inject_payment_semantic_error(body: dict, label: str, rng: Random) -> None:
         return
     if label == "semantic_cross_field_violation":
         if rng.random() < 0.5:
-            body["body_invoice_id"] = f"{body['invoice_id']}_mismatch"
+            body["body_invoice_id"] = _different_identifier(body["invoice_id"], "inv")
         else:
             body["currency"] = "EUR" if body["expected_currency"] != "EUR" else "USD"
     elif label == "semantic_domain_constraint_violation":
@@ -258,7 +262,7 @@ def _inject_healthcare_semantic_error(body: dict, label: str, rng: Random) -> No
         return
     if label == "semantic_cross_field_violation":
         if rng.random() < 0.5:
-            body["body_patient_id"] = f"{body['patient_id']}_mismatch"
+            body["body_patient_id"] = _different_identifier(body["patient_id"], "pat")
         else:
             body["requested_slot_start"], body["requested_slot_end"] = (
                 body["requested_slot_end"],
@@ -279,7 +283,7 @@ def _inject_course_semantic_error(body: dict, label: str, rng: Random) -> None:
     if not isinstance(body, dict):
         return
     if label == "semantic_cross_field_violation":
-        body["body_student_id"] = f"{body['student_id']}_mismatch"
+        body["body_student_id"] = _different_identifier(body["student_id"], "stu")
     elif label == "semantic_domain_constraint_violation":
         body["required_prerequisites"] = list(body["completed_prerequisites"]) + ["BIO101"]
     elif label == "semantic_state_violation":
@@ -294,21 +298,18 @@ def _inject_ticket_semantic_error(body: dict, label: str, rng: Random) -> None:
         return
     if label == "semantic_cross_field_violation":
         if rng.random() < 0.5:
-            body["body_ticket_id"] = f"{body['ticket_id']}_mismatch"
+            body["body_ticket_id"] = _different_identifier(body["ticket_id"], "tkt")
         else:
             body["target_status"] = body["current_status"]
     elif label == "semantic_domain_constraint_violation":
-        choice = rng.randrange(3)
+        choice = rng.randrange(2)
         if choice == 0:
             body["target_status"] = "resolved"
             body.pop("resolution_code", None)
-        elif choice == 1:
-            body["target_status"] = rng.choice(["in_progress", "resolved"])
-            body["acting_user_id"] = f"agent_{rng.randint(1000, 9999)}"
         else:
-            body["priority"] = "high"
-            body["target_status"] = "escalated"
-            body["escalation_allowed"] = False
+            choices = [value for value in ["in_progress", "resolved"] if value != body.get("current_status")]
+            body["target_status"] = rng.choice(choices)
+            body["acting_user_id"] = f"agent_{rng.randint(1000, 9999)}"
     elif label == "semantic_state_violation":
         body["current_status"] = "closed"
         body["target_status"] = "in_progress"
@@ -319,7 +320,7 @@ def _inject_shipping_semantic_error(body: dict, label: str, rng: Random) -> None
         return
     if label == "semantic_cross_field_violation":
         if rng.random() < 0.5:
-            body["body_shipment_id"] = f"{body['shipment_id']}_mismatch"
+            body["body_shipment_id"] = _different_identifier(body["shipment_id"], "ship")
         else:
             body["prepaid_label_requested"] = True
             body["return_country"] = "CA" if body["destination_country"] != "CA" else "US"
@@ -337,19 +338,9 @@ def _inject_subscription_semantic_error(body: dict, label: str, rng: Random) -> 
     if not isinstance(body, dict):
         return
     if label == "semantic_cross_field_violation":
-        if rng.random() < 0.5:
-            body["body_subscription_id"] = f"{body['subscription_id']}_mismatch"
-        else:
-            body["target_plan"] = body["current_plan"]
+        body["body_subscription_id"] = _different_identifier(body["subscription_id"], "sub")
     elif label == "semantic_domain_constraint_violation":
-        if rng.random() < 0.5:
-            body["current_plan"] = "enterprise"
-            body["target_plan"] = "basic"
-            body["requested_effective_date"] = "2026-07-01"
-            body["current_billing_period_end"] = "2026-08-01"
-            body["downgrade_allowed"] = False
-        else:
-            body["has_unpaid_invoice"] = True
+        body["has_unpaid_invoice"] = True
     elif label == "semantic_state_violation":
         if rng.random() < 0.5:
             body["account_status"] = rng.choice(["paused", "cancelled"])
@@ -357,3 +348,9 @@ def _inject_subscription_semantic_error(body: dict, label: str, rng: Random) -> 
             body["current_plan"] = "basic"
             body["target_plan"] = "enterprise"
             body["billing_status"] = rng.choice(["past_due", "failed"])
+
+
+def _different_identifier(value: str, prefix: str) -> str:
+    digits = sum(ord(character) for character in value) % 9000 + 1000
+    candidate = f"{prefix}_{digits}"
+    return f"{prefix}_{digits + 1}" if candidate == value else candidate

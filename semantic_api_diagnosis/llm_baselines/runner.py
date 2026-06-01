@@ -3,6 +3,7 @@
 import json
 import os
 import re
+from typing import Any
 
 from semantic_api_diagnosis.labels import FIXED_LABEL_TAXONOMY, severity_bucket
 
@@ -20,12 +21,27 @@ LABEL_SEVERITIES = {
     "semantic_state_violation": "high",
 }
 
+PREDICTION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "validity": {"type": "string", "enum": ["valid", "invalid"]},
+        "error_labels": {
+            "type": "array",
+            "items": {"type": "string", "enum": sorted(FIXED_LABEL_TAXONOMY)},
+        },
+        "severity_bucket": {"type": "string", "enum": ["none", "medium", "high"]},
+    },
+    "required": ["validity", "error_labels", "severity_bucket"],
+    "additionalProperties": False,
+}
+
 
 class LLMRunner:
-    def __init__(self, provider: str, model: str, dry_run: bool = False) -> None:
+    def __init__(self, provider: str, model: str, dry_run: bool = False, timeout: float = 60.0) -> None:
         self.provider = provider
         self.model = model
         self.dry_run = dry_run
+        self.timeout = timeout
 
     def run(self, prompt: str) -> dict:
         if self.dry_run or self.provider == "manual":
@@ -38,16 +54,43 @@ class LLMRunner:
             raw = json.dumps(_mock_prediction(prompt), sort_keys=True)
             return _parse_response(raw)
         if self.provider == "openai":
-            raw = self._run_openai(prompt)
-            return _parse_response(raw)
+            response = self._run_openai(prompt)
+            return {**_parse_response(response["raw_response"]), **response}
         raise ValueError(f"Unsupported provider: {self.provider}")
 
-    def _run_openai(self, prompt: str) -> str:
-        if not os.environ.get("OPENAI_API_KEY"):
+    def _run_openai(self, prompt: str) -> dict:
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
             raise RuntimeError("OPENAI_API_KEY must be set for provider=openai")
-        raise NotImplementedError(
-            "OpenAI provider wiring is intentionally not enabled yet. Use provider=mock or dry-run."
+        try:
+            import httpx
+        except ImportError as exc:
+            raise ImportError("provider=openai requires httpx") from exc
+        payload = {
+            "model": self.model,
+            "input": prompt,
+            "text": {
+                "format": {
+                    "type": "json_schema",
+                    "name": "semantic_api_diagnosis",
+                    "strict": True,
+                    "schema": PREDICTION_SCHEMA,
+                }
+            },
+        }
+        response = httpx.post(
+            "https://api.openai.com/v1/responses",
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json=payload,
+            timeout=self.timeout,
         )
+        response.raise_for_status()
+        body = response.json()
+        return {
+            "raw_response": _response_output_text(body),
+            "provider_response_id": body.get("id"),
+            "usage": body.get("usage"),
+        }
 
 
 def parse_prediction_response(raw_response: str) -> dict:
@@ -61,6 +104,18 @@ def _parse_response(raw_response: str) -> dict:
         return {"raw_response": raw_response, "parsed_prediction": prediction, "parse_error": None}
     except (json.JSONDecodeError, TypeError, ValueError) as error:
         return {"raw_response": raw_response, "parsed_prediction": None, "parse_error": str(error)}
+
+
+def _response_output_text(body: dict[str, Any]) -> str:
+    if body.get("output_text"):
+        return str(body["output_text"])
+    for item in body.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") == "refusal":
+                raise ValueError(f"provider refusal: {content.get('refusal', '')}")
+            if content.get("type") == "output_text":
+                return str(content.get("text", ""))
+    raise ValueError("provider response did not contain output text")
 
 
 def _normalize_prediction(parsed: dict) -> dict:

@@ -7,6 +7,7 @@ from datetime import date, timedelta
 from random import Random
 
 from semantic_api_diagnosis.contracts.endpoint_contract import CONTRACTS, get_contract
+from semantic_api_diagnosis.contracts.policies import add_counterfactual_policy, apply_policy_to_valid_body
 from semantic_api_diagnosis.dataset_plan import SUPPORTED_FAMILY_MODES, SUPPORTED_SPLITS, resolve_families
 from semantic_api_diagnosis.error_injectors.injectors import inject_error
 from semantic_api_diagnosis.hidden_validators.validator import assert_quality, target_from_findings, validate_example
@@ -155,6 +156,8 @@ def _least_used_family(families: tuple[str, ...], family_counts: Counter) -> str
 def _build_valid_example(index: int, family: str, rng: Random, split: str) -> dict:
     contract = get_contract(family)
     body = _valid_body(family, rng)
+    contract_dict = add_counterfactual_policy(_varied_contract_dict(contract, rng), family, rng)
+    apply_policy_to_valid_body(body, contract_dict["policy"], rng)
     request = {
         "method": contract.method,
         "url": _render_url(contract.url_template, body),
@@ -162,7 +165,6 @@ def _build_valid_example(index: int, family: str, rng: Random, split: str) -> di
         "query_params": {},
         "body": body,
     }
-    contract_dict = _varied_contract_dict(contract, rng)
     return {
         "id": f"ex_{index:06d}",
         "split": split,

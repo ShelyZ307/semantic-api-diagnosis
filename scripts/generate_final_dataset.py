@@ -36,10 +36,18 @@ def generate_final_splits(
 ) -> dict[str, list[dict]]:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    splits = {
-        "train": generate_examples(train_count, split="train", family_mode="seen", seed=seed),
-    }
     reference_index = _SimilarityIndex()
+    splits = {
+        "train": _generate_filtered_split(
+            split="train",
+            family_mode="seen",
+            target_count=train_count,
+            seed=seed,
+            reference_index=reference_index,
+            threshold=near_duplicate_threshold,
+            max_attempt_batches=max_attempt_batches,
+        ),
+    }
     reference_index.add_split("train", splits["train"])
 
     splits["validation"] = _generate_filtered_split(

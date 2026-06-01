@@ -3,6 +3,7 @@
 from datetime import date, datetime
 
 from semantic_api_diagnosis.contracts.endpoint_contract import get_contract
+from semantic_api_diagnosis.contracts.policies import policy_findings
 from semantic_api_diagnosis.labels import FIXED_LABEL_TAXONOMY, severity_bucket
 
 
@@ -56,6 +57,7 @@ def validate_example(example: dict) -> list[dict]:
 
     findings.extend(_range_findings(family, body))
     findings.extend(_semantic_findings(family, body, request))
+    findings.extend(_finding(label, field) for label, field in policy_findings(example))
     return _dedupe(findings)
 
 
@@ -242,8 +244,6 @@ def _refund_semantics(body: dict, request: dict) -> list[dict]:
     original = _number(body.get("original_payment"))
     if refund is not None and original is not None and refund > original:
         findings.append(_finding("semantic_domain_constraint_violation", "refund_amount"))
-    if _has_fields(body, ["order_status"]) and body["order_status"] != "paid":
-        findings.append(_finding("semantic_state_violation", "order_status"))
     return findings
 
 
@@ -258,8 +258,6 @@ def _booking_semantics(body: dict) -> list[dict]:
     capacity = body.get("room_capacity")
     if isinstance(guests, int) and isinstance(capacity, int) and guests > capacity:
         findings.append(_finding("semantic_domain_constraint_violation", "number_of_guests"))
-    if _has_fields(body, ["reservation_status"]) and body["reservation_status"] not in {"pending", "confirmed"}:
-        findings.append(_finding("semantic_state_violation", "reservation_status"))
     return findings
 
 
@@ -272,8 +270,6 @@ def _permission_semantics(body: dict) -> list[dict]:
     if _role_rank(body.get("target_role")) > _role_rank(body.get("current_role")):
         if isinstance(body.get("approver_role"), str) and body.get("approver_role") not in {"manager", "admin"}:
             findings.append(_finding("semantic_domain_constraint_violation", "approver_role"))
-    if _has_fields(body, ["request_status"]) and body["request_status"] != "pending":
-        findings.append(_finding("semantic_state_violation", "request_status"))
     return findings
 
 
@@ -289,8 +285,6 @@ def _inventory_semantics(body: dict, request: dict) -> list[dict]:
     if isinstance(requested, int) and isinstance(available, int):
         if requested > available and body.get("allow_backorder") is not True:
             findings.append(_finding("semantic_domain_constraint_violation", "requested_quantity"))
-    if _has_fields(body, ["reservation_status"]) and body["reservation_status"] not in {"available", "pending"}:
-        findings.append(_finding("semantic_state_violation", "reservation_status"))
     return findings
 
 
@@ -307,8 +301,6 @@ def _payment_semantics(body: dict, request: dict) -> list[dict]:
     if payment is not None and invoice_total is not None and already_paid is not None:
         if payment + already_paid > invoice_total:
             findings.append(_finding("semantic_domain_constraint_violation", "payment_amount"))
-    if _has_fields(body, ["invoice_status"]) and body["invoice_status"] not in {"open", "partially_paid"}:
-        findings.append(_finding("semantic_state_violation", "invoice_status"))
     if body.get("payment_method") not in {"card", "bank_transfer", "wallet"}:
         findings.append(_finding("invalid_value_range", "payment_method"))
     return findings
@@ -345,8 +337,6 @@ def _healthcare_semantics(body: dict, request: dict) -> list[dict]:
     if body.get("appointment_type") == "covered_specialist":
         if _has_fields(body, ["patient_insurance_status"]) and body["patient_insurance_status"] != "active":
             findings.append(_finding("semantic_domain_constraint_violation", "patient_insurance_status"))
-    if _has_fields(body, ["appointment_status"]) and body["appointment_status"] not in {"draft", "requested"}:
-        findings.append(_finding("semantic_state_violation", "appointment_status"))
     return findings
 
 
@@ -368,10 +358,6 @@ def _course_semantics(body: dict, request: dict) -> list[dict]:
         if isinstance(completed, list) and isinstance(required, list):
             if not set(required).issubset(set(completed)):
                 findings.append(_finding("semantic_domain_constraint_violation", "required_prerequisites"))
-    if _has_fields(body, ["registration_window_open"]) and body["registration_window_open"] is not True:
-        findings.append(_finding("semantic_state_violation", "registration_window_open"))
-    if _has_fields(body, ["enrollment_status"]) and body["enrollment_status"] not in {"eligible", "waitlisted"}:
-        findings.append(_finding("semantic_state_violation", "enrollment_status"))
     return findings
 
 
@@ -390,9 +376,6 @@ def _ticket_semantics(body: dict, request: dict) -> list[dict]:
     if _has_fields(body, ["priority", "target_status", "escalation_allowed"]):
         if body["priority"] == "high" and body["target_status"] == "escalated" and body["escalation_allowed"] is not True:
             findings.append(_finding("semantic_domain_constraint_violation", "escalation_allowed"))
-    if _has_fields(body, ["current_status", "target_status"]):
-        if body["current_status"] == "closed" and body["target_status"] == "in_progress":
-            findings.append(_finding("semantic_state_violation", "current_status"))
     return findings
 
 
@@ -412,8 +395,6 @@ def _shipping_semantics(body: dict, request: dict) -> list[dict]:
     if _has_fields(body, ["item_condition", "return_reason"]):
         if body["item_condition"] in {"damaged", "defective"} and body["return_reason"] not in {"damaged", "defective"}:
             findings.append(_finding("semantic_domain_constraint_violation", "return_reason"))
-    if _has_fields(body, ["delivery_status"]) and body["delivery_status"] != "delivered":
-        findings.append(_finding("semantic_state_violation", "delivery_status"))
     return findings
 
 
@@ -428,10 +409,6 @@ def _subscription_semantics(body: dict, request: dict) -> list[dict]:
         findings.append(_finding("semantic_cross_field_violation", "body_subscription_id"))
     if _has_fields(body, ["current_plan", "target_plan"]) and body["current_plan"] == body["target_plan"]:
         findings.append(_finding("semantic_cross_field_violation", "target_plan"))
-    if _has_fields(body, ["current_plan", "target_plan", "billing_status"]):
-        if _plan_rank(body.get("target_plan")) > _plan_rank(body.get("current_plan")):
-            if body["billing_status"] != "valid":
-                findings.append(_finding("semantic_state_violation", "billing_status"))
     if _has_fields(body, ["requested_effective_date", "current_billing_period_end", "downgrade_allowed"]):
         effective = _parse_date(body.get("requested_effective_date"))
         period_end = _parse_date(body.get("current_billing_period_end"))
@@ -439,8 +416,6 @@ def _subscription_semantics(body: dict, request: dict) -> list[dict]:
             findings.append(_finding("semantic_domain_constraint_violation", "requested_effective_date"))
     if _has_fields(body, ["has_unpaid_invoice"]) and body["has_unpaid_invoice"] is True:
         findings.append(_finding("semantic_domain_constraint_violation", "has_unpaid_invoice"))
-    if _has_fields(body, ["account_status"]) and body["account_status"] != "active":
-        findings.append(_finding("semantic_state_violation", "account_status"))
     return findings
 
 

@@ -48,8 +48,24 @@ Secondary tasks:
 - Leakage, duplicate, overlap, and shortcut checks passed
 - Baseline evaluation framework implemented
 - Contract-dependent hard subsets created
-- Zero-shot/few-shot LLM baseline infrastructure implemented with mock/dry-run support
-- Ready for fine-tuned model training
+- Contract-dependence tightening with visible per-example policy counterfactuals implemented
+- DistilBERT and RoBERTa fine-tuning implemented and run
+- Validation-tuned encoder evaluation implemented for full, hard-subset, and shortcut views
+- Positive-class-weighted RoBERTa tried once and rejected as an improvement because it overpredicts semantic errors
+- Fixed 120-example Stage 8 LLM sample protocol implemented
+- Provider-backed zero-shot/few-shot LLM results are not available unless `OPENAI_API_KEY` is set and the Stage 8 commands are run
+
+## Main Findings
+
+The honest Version 1 conclusion is narrower than the original hoped-for claim:
+
+- RoBERTa learns contract-sensitive behavior and performs strongly on seen endpoint families.
+- Removing contract text sharply hurts RoBERTa semantic performance, especially on seen-family examples.
+- RoBERTa does not solve unseen-family semantic generalization.
+- RoBERTa does not beat the visible rule-based baseline on unseen semantic diagnosis.
+- The benchmark reveals that many examples are request-obvious; the most scientifically useful cases are the contract-dependent hard subsets and shortcut ablations.
+
+The project contribution is therefore a controlled benchmark and analysis framework for contract-dependent semantic API diagnosis, not a claim that fine-tuned encoders fully solve held-out endpoint-family reasoning.
 
 ## Endpoint Families
 
@@ -108,7 +124,7 @@ source .venv/bin/activate
 python3 -m pip install -e ".[dev]"
 ```
 
-The project currently uses the Python standard library plus `pytest` for tests.
+Core generation, baseline, and test code use the Python standard library plus `pytest`. Real encoder training/evaluation additionally requires the optional `train` dependencies.
 
 ## Running Tests
 
@@ -167,7 +183,12 @@ python3 scripts/analyze_contract_dependence.py \
   --output data/generated/contract_dependence_report.md
 ```
 
-Future model results should be reported on both full test sets and contract-dependent hard subsets.
+Model results are reported on both full test sets and contract-dependent hard subsets.
+
+The Version 1 tightening comparison is recorded in
+`docs/results/contract_dependence_tightening_report.md`. Request-only and
+no-constraints views now show a substantial semantic-performance decrease
+relative to full contract input.
 
 ## LLM Baseline Samples
 
@@ -190,11 +211,11 @@ python3 scripts/evaluate_llm_predictions.py \
 
 Few-shot demonstrations must come from training examples only. Do not include validation, seen-test, unseen-family-test, or unseen-family examples as demonstrations.
 
-## Stage 6: Fine-tuning
+## Stage 6: Fine-Tuning
 
-Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on encoder models such as DistilBERT, RoBERTa, or DeBERTa.
+Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on encoder models such as DistilBERT and RoBERTa.
 
-The first fine-tuning scaffold is DistilBERT multi-label classification over the fixed error-label taxonomy. Full generated datasets are not committed to git; regenerate them locally before running real training.
+The fine-tuning pipeline performs multi-label classification over the fixed error-label taxonomy. DistilBERT and RoBERTa were both trained and evaluated for Version 1. Full generated datasets and model checkpoints are not committed to git; regenerate the datasets locally before rerunning training.
 
 Dry-run command:
 
@@ -213,7 +234,7 @@ python3 -m pip install -e ".[train]"
 
 ### Stage 6B: Tiny Smoke Training
 
-This is only a pipeline smoke test. It is not the final reported model, and final training should be run later on a GPU/Colab or stronger environment. Outputs are intentionally ignored by git.
+This is only a pipeline smoke test. It is not the final reported model. Outputs are intentionally ignored by git.
 
 ```bash
 python3 scripts/train_distilbert.py \
@@ -229,10 +250,144 @@ python3 scripts/train_distilbert.py \
   --dry-run false
 ```
 
+### Stage 6C: Full Encoder Training And Evaluation
+
+Reproduce the full DistilBERT experiment:
+
+```bash
+python3 scripts/train_distilbert.py \
+  --train data/generated/final_train.jsonl \
+  --validation data/generated/final_validation.jsonl \
+  --model-name distilbert-base-uncased \
+  --output-dir outputs/distilbert_v1_seed42 \
+  --epochs 3 \
+  --batch-size 16 \
+  --max-length 512 \
+  --seed 42 \
+  --save-final-model true \
+  --dry-run false
+
+python3 scripts/run_finetuned_evaluation.py \
+  --model-dir outputs/distilbert_v1_seed42/model \
+  --output-dir outputs/distilbert_v1_seed42/evaluation \
+  --threshold-mode per_label \
+  --max-length 512
+```
+
+Reproduce the RoBERTa experiment using the same generated train and validation splits:
+
+```bash
+python3 scripts/train_roberta.py \
+  --train data/generated/final_train.jsonl \
+  --validation data/generated/final_validation.jsonl \
+  --model-name roberta-base \
+  --output-dir outputs/roberta_v1_seed42 \
+  --epochs 3 \
+  --batch-size 4 \
+  --max-length 512 \
+  --seed 42 \
+  --save-final-model true \
+  --dry-run false
+
+python3 scripts/run_finetuned_evaluation.py \
+  --model-dir outputs/roberta_v1_seed42/model \
+  --output-dir outputs/roberta_v1_seed42/evaluation \
+  --threshold-mode per_label \
+  --max-length 512
+```
+
+The smaller RoBERTa batch size is the CPU-friendly setting used for the Version 1 local run. Each evaluator run tunes per-label thresholds on `final_validation.jsonl` only, saves them to `thresholds.json`, and applies them unchanged to full, contract-dependent, and shortcut-ablation test views.
+
+### Stage 7: Controlled LLM And Weighted-Loss Comparison
+
+Provider-backed OpenAI samples require `OPENAI_API_KEY`. The controlled runner evaluates zero-shot and few-shot prompts on sampled seen, unseen-family, and contract-dependent unseen examples. Raw responses, parsed predictions, failures, and metrics are saved under `data/generated/stage7_llm/`. No provider-backed LLM result is included unless this command is run with real credentials.
+
+```bash
+python3 scripts/run_stage7_llm_baselines.py \
+  --provider openai \
+  --model gpt-4o-mini \
+  --sample-size 40
+```
+
+The single positive-class-weighted RoBERTa comparison was run and rejected as an improvement. It reduced critical semantic misses by predicting semantic labels too broadly, which severely hurt precision, exact match, and overall micro-F1. Reproduce it with:
+
+```bash
+python3 scripts/train_roberta.py \
+  --train data/generated/final_train.jsonl \
+  --validation data/generated/final_validation.jsonl \
+  --model-name roberta-base \
+  --output-dir outputs/roberta_weighted_v1_seed42 \
+  --epochs 3 \
+  --batch-size 4 \
+  --max-length 512 \
+  --seed 42 \
+  --loss-mode pos_weighted \
+  --save-final-model true \
+  --dry-run false
+
+python3 scripts/run_finetuned_evaluation.py \
+  --model-dir outputs/roberta_weighted_v1_seed42/model \
+  --output-dir outputs/roberta_weighted_v1_seed42/evaluation \
+  --threshold-mode per_label \
+  --max-length 512
+
+python3 scripts/analyze_stage7_unseen_errors.py
+python3 scripts/generate_stage7_report.py
+```
+
+### Stage 8: Fixed Sample LLM Baselines
+
+Create the fixed cost-controlled sample and evaluate non-LLM baselines on exactly the same rows:
+
+```bash
+python3 scripts/create_stage8_llm_sample.py \
+  --seed 808 \
+  --per-source 40 \
+  --output-dir data/generated/stage8_llm_sample
+
+python3 scripts/evaluate_stage8_sample_non_llm.py \
+  --output data/generated/stage8_llm_sample/non_llm_sample_metrics.json
+```
+
+Provider-backed LLM calls fail fast unless `OPENAI_API_KEY` is set. In the current local run, `OPENAI_API_KEY` was unavailable, so real zero-shot/few-shot LLM results are missing and mock outputs are excluded from scientific claims. When credentials are available, run:
+
+```bash
+python3 scripts/run_llm_baseline.py \
+  --mode zero_shot \
+  --provider openai \
+  --model gpt-4o-mini \
+  --input data/generated/stage8_llm_sample/combined_sample.jsonl \
+  --sample-size 120 \
+  --output data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
+  --seed 808 \
+  --timeout 60
+
+python3 scripts/run_llm_baseline.py \
+  --mode few_shot \
+  --provider openai \
+  --model gpt-4o-mini \
+  --input data/generated/stage8_llm_sample/combined_sample.jsonl \
+  --train data/generated/final_train.jsonl \
+  --sample-size 120 \
+  --output data/generated/stage8_llm_sample/few_shot_predictions.jsonl \
+  --seed 808 \
+  --timeout 60
+
+python3 scripts/evaluate_stage8_llm_sample_predictions.py \
+  --predictions data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
+  --output data/generated/stage8_llm_sample/zero_shot_metrics.json
+
+python3 scripts/evaluate_stage8_llm_sample_predictions.py \
+  --predictions data/generated/stage8_llm_sample/few_shot_predictions.jsonl \
+  --output data/generated/stage8_llm_sample/few_shot_metrics.json
+
+python3 scripts/generate_stage8_llm_sample_report.py
+```
+
 ## Documentation
 
-See `docs/` for stage summaries and `docs/results/` for checked-in baseline and contract-dependence reports.
+See `docs/` for stage summaries and `docs/results/` for checked-in baseline, contract-dependence, fine-tuned model, weighted-loss, Stage 8 sample-protocol, and final summary reports.
 
-## Next Stage
+## Remaining Work
 
-Fine-tuned model training with DistilBERT, RoBERTa, and DeBERTa. Transformer training scripts are intentionally placeholder-only until baseline and leakage gates are finalized.
+Before final submission, the main optional missing experiment is to run provider-backed zero-shot and few-shot LLM baselines on the fixed Stage 8 sample if `OPENAI_API_KEY` is available. Do not present mock LLM results as scientific evidence.

@@ -47,15 +47,19 @@ class VisibleRuleBasedBaseline:
             labels.add("unexpected_or_malformed_body_structure")
         if any(value == "not_the_expected_type" for value in fields.values()):
             labels.add("wrong_type")
-        if any(isinstance(value, (int, float)) and not isinstance(value, bool) and value <= 0 for value in fields.values()):
+        if _visible_minimum_violation(text, fields):
             labels.add("invalid_value_range")
-        if _has_unsupported_enum_marker(fields):
+        elif any(isinstance(value, (int, float)) and not isinstance(value, bool) and value <= 0 for value in fields.values()):
+            labels.add("invalid_value_range")
+        if _visible_allowed_value_violation(text, fields):
+            labels.add("invalid_value_range")
+        elif _has_unsupported_enum_marker(fields):
             labels.add("invalid_value_range")
         if _visible_cross_field_violation(fields, url):
             labels.add("semantic_cross_field_violation")
-        if _visible_domain_violation(fields):
+        if _visible_domain_violation(text, fields):
             labels.add("semantic_domain_constraint_violation")
-        if _visible_state_violation(fields):
+        if _visible_state_violation(text, fields):
             labels.add("semantic_state_violation")
         ordered = sorted(labels)
         severities = [LABEL_SEVERITIES[label] for label in ordered]
@@ -145,7 +149,9 @@ def _visible_cross_field_violation(fields: dict, url: str | None) -> bool:
     return False
 
 
-def _visible_domain_violation(fields: dict) -> bool:
+def _visible_domain_violation(text: str, fields: dict) -> bool:
+    if _visible_maximum_violation(text, fields):
+        return True
     if _number(fields.get("refund_amount")) and _number(fields.get("original_payment")):
         if fields["refund_amount"] > fields["original_payment"]:
             return True
@@ -171,7 +177,7 @@ def _visible_domain_violation(fields: dict) -> bool:
     return False
 
 
-def _visible_state_violation(fields: dict) -> bool:
+def _visible_state_violation(text: str, fields: dict) -> bool:
     blocked_by_field = {
         "order_status": {"pending", "cancelled", "refunded"},
         "reservation_status": {"checked_in", "cancelled"},
@@ -183,7 +189,14 @@ def _visible_state_violation(fields: dict) -> bool:
         "delivery_status": {"in_transit", "lost", "returned", "cancelled"},
         "account_status": {"paused", "cancelled"},
     }
+    dynamic_rules = _allowed_value_rules(text)
+    for field in _state_fields():
+        if field in dynamic_rules and field in fields:
+            if str(fields[field]) not in dynamic_rules[field]:
+                return True
     for field, blocked_values in blocked_by_field.items():
+        if field in dynamic_rules:
+            continue
         if fields.get(field) in blocked_values:
             return True
     if fields.get("registration_window_open") is False:
@@ -193,6 +206,49 @@ def _visible_state_violation(fields: dict) -> bool:
     if fields.get("current_status") == "closed" and fields.get("target_status") == "in_progress":
         return True
     return False
+
+
+def _visible_minimum_violation(text: str, fields: dict) -> bool:
+    for field, value in re.findall(r"For this endpoint, ([a-z_]+) must be at least ([0-9.]+)\.", text):
+        if _number(fields.get(field)) is not None and fields[field] < float(value):
+            return True
+    return False
+
+
+def _visible_maximum_violation(text: str, fields: dict) -> bool:
+    for field, value in re.findall(r"For this endpoint, ([a-z_]+) must not exceed ([0-9.]+)\.", text):
+        if _number(fields.get(field)) is not None and fields[field] > float(value):
+            return True
+    return False
+
+
+def _visible_allowed_value_violation(text: str, fields: dict) -> bool:
+    rules = _allowed_value_rules(text)
+    return any(
+        field not in _state_fields() and field in fields and str(fields[field]) not in allowed
+        for field, allowed in rules.items()
+    )
+
+
+def _allowed_value_rules(text: str) -> dict[str, set[str]]:
+    return {
+        field: {value.strip() for value in values.split(",")}
+        for field, values in re.findall(r"For this endpoint, ([a-z_]+) must be one of: ([^.]+)\.", text)
+    }
+
+
+def _state_fields() -> set[str]:
+    return {
+        "order_status",
+        "reservation_status",
+        "request_status",
+        "invoice_status",
+        "appointment_status",
+        "enrollment_status",
+        "current_status",
+        "delivery_status",
+        "account_status",
+    }
 
 
 def _path_identifier(url: str) -> str | None:
