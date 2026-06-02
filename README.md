@@ -53,7 +53,7 @@ Secondary tasks:
 - Validation-tuned encoder evaluation implemented for full, hard-subset, and shortcut views
 - Positive-class-weighted RoBERTa tried once and rejected as an improvement because it overpredicts semantic errors
 - Fixed 120-example Stage 8 LLM sample protocol implemented
-- Provider-backed zero-shot/few-shot LLM results are not available unless `OPENAI_API_KEY` is set and the Stage 8 commands are run
+- Provider-backed zero-shot/few-shot LLM calls were attempted on the fixed Stage 8 sample, but heavy rate limits left the run incomplete; partial rows are documented only as diagnostics
 
 ## Main Findings
 
@@ -349,7 +349,9 @@ python3 scripts/evaluate_stage8_sample_non_llm.py \
   --output data/generated/stage8_llm_sample/non_llm_sample_metrics.json
 ```
 
-Provider-backed LLM calls fail fast unless `OPENAI_API_KEY` is set. In the current local run, `OPENAI_API_KEY` was unavailable, so real zero-shot/few-shot LLM results are missing and mock outputs are excluded from scientific claims. When credentials are available, run:
+Provider-backed LLM calls require `OPENAI_API_KEY`. A `gpt-4o-mini` run was attempted on the fixed Stage 8 sample, but heavy `429 Too Many Requests` rate limits left it incomplete: zero-shot produced 9 / 120 successful responses, and few-shot produced 44 / 120 successful responses. The checked-in report treats those rows as partial diagnostics only, not as a clean comparable LLM baseline. Mock outputs remain excluded from scientific claims.
+
+If a future run is intentionally resumed with adequate quota, use the retry/resume flags and keep the result clearly labeled as sampled:
 
 ```bash
 python3 scripts/run_llm_baseline.py \
@@ -360,7 +362,11 @@ python3 scripts/run_llm_baseline.py \
   --sample-size 120 \
   --output data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
   --seed 808 \
-  --timeout 60
+  --timeout 60 \
+  --resume true \
+  --max-retries 5 \
+  --retry-initial-sleep 60 \
+  --sleep-between-calls 2
 
 python3 scripts/run_llm_baseline.py \
   --mode few_shot \
@@ -371,7 +377,11 @@ python3 scripts/run_llm_baseline.py \
   --sample-size 120 \
   --output data/generated/stage8_llm_sample/few_shot_predictions.jsonl \
   --seed 808 \
-  --timeout 60
+  --timeout 60 \
+  --resume true \
+  --max-retries 5 \
+  --retry-initial-sleep 60 \
+  --sleep-between-calls 2
 
 python3 scripts/evaluate_stage8_llm_sample_predictions.py \
   --predictions data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
@@ -390,4 +400,6 @@ See `docs/` for stage summaries and `docs/results/` for checked-in baseline, con
 
 ## Remaining Work
 
-Before final submission, the main optional missing experiment is to run provider-backed zero-shot and few-shot LLM baselines on the fixed Stage 8 sample if `OPENAI_API_KEY` is available. Do not present mock LLM results as scientific evidence.
+Before final submission, do not expand the experiment scope. The provider-backed Stage 8 LLM attempt should remain documented as incomplete unless a future quota-safe rerun is explicitly planned. Do not present mock LLM results or partial provider rows as clean scientific evidence.
+
+We did not pursue proprietary OpenAI fine-tuning because it would introduce a substantially different training/evaluation pipeline, additional cost/quota risks, and less transparent comparability with local encoder fine-tuning. The final project prioritizes reproducible local encoder fine-tuning, shortcut ablations, contract-dependent evaluation, and error analysis.

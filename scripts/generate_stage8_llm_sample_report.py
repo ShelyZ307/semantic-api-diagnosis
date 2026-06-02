@@ -92,6 +92,7 @@ def _main_table(non_llm: dict, llm_results: dict) -> list[str]:
     lines = [
         "## Main Sampled Comparison",
         "",
+        *_llm_completion_caveat(llm_results),
         "| group | model | n | micro-F1 | semantic macro-F1 | exact match | critical semantic miss rate |",
         "|---|---|---:|---:|---:|---:|---:|",
     ]
@@ -151,13 +152,28 @@ def _interpretation(non_llm: dict, llm_results: dict) -> list[str]:
             "Do not treat mock or missing rows as scientific evidence."
         )
     else:
+        if _has_transport_failures(llm_results):
+            lines.append(
+                "- The provider-backed LLM run is incomplete because of OpenAI transport errors, mostly `429 Too Many Requests`. "
+                "These rows are counted as empty predictions, so the LLM numbers should be treated as partial-run diagnostics."
+            )
         zero = _metric(_result_for_group(llm_results["zero_shot_llm"], "unseen_sample")["metrics"], "semantic_macro")
         few = _metric(_result_for_group(llm_results["few_shot_llm"], "unseen_sample")["metrics"], "semantic_macro")
-        lines.append(f"- Zero-shot LLM unseen semantic macro-F1 is `{zero:.3f}`; few-shot is `{few:.3f}`.")
-        lines.append(_comparison_sentence("zero-shot LLM", zero, "original RoBERTa", roberta_unseen))
-        lines.append(_comparison_sentence("few-shot LLM", few, "original RoBERTa", roberta_unseen))
-        lines.append(_comparison_sentence("few-shot LLM", few, "zero-shot LLM", zero))
-        lines.append(_comparison_sentence("best sampled LLM", max(zero, few), "visible rule baseline", rule_unseen))
+        if _has_transport_failures(llm_results):
+            lines.append(
+                f"- The partial-run table records zero-shot unseen semantic macro-F1 as `{zero:.3f}` and few-shot as `{few:.3f}`, "
+                "but these values are dominated by missing provider responses and should not be read as completed LLM baseline performance."
+            )
+            lines.append(
+                "- Because the provider run is incomplete, do not claim that zero-shot or few-shot LLMs definitively outperform or underperform "
+                "original RoBERTa or the visible rule baseline."
+            )
+        else:
+            lines.append(f"- Zero-shot LLM unseen semantic macro-F1 is `{zero:.3f}`; few-shot is `{few:.3f}`.")
+            lines.append(_comparison_sentence("zero-shot LLM", zero, "original RoBERTa", roberta_unseen))
+            lines.append(_comparison_sentence("few-shot LLM", few, "original RoBERTa", roberta_unseen))
+            lines.append(_comparison_sentence("few-shot LLM", few, "zero-shot LLM", zero))
+            lines.append(_comparison_sentence("best sampled LLM", max(zero, few), "visible rule baseline", rule_unseen))
     lines.extend(
         [
             "- Recommended framing: RoBERTa learns contract-sensitive behavior and performs strongly in-domain, but unseen-family transfer remains weak. "
@@ -166,6 +182,32 @@ def _interpretation(non_llm: dict, llm_results: dict) -> list[str]:
         ]
     )
     return lines
+
+
+def _llm_completion_caveat(llm_results: dict) -> list[str]:
+    if not _has_transport_failures(llm_results):
+        return []
+    lines = [
+        "Provider-backed OpenAI calls were attempted for all fixed-sample examples, but the run still has transport failures. Metrics below include failed transport rows as empty predictions, so they should be treated as partial-run diagnostics rather than a clean full-sample LLM baseline.",
+        "",
+        "Successful provider responses:",
+        "",
+    ]
+    for model, results in llm_results.items():
+        if results is None:
+            continue
+        combined = results["combined"]
+        successes = combined["n"] - combined["transport_error_count"]
+        lines.append(f"- {MODEL_LABELS[model]}: {successes} / {combined['n']}")
+    lines.append("")
+    return lines
+
+
+def _has_transport_failures(llm_results: dict) -> bool:
+    return any(
+        results is not None and results["combined"].get("transport_error_count", 0) > 0
+        for results in llm_results.values()
+    )
 
 
 def _group_metrics(non_llm: dict, llm_results: dict, group: str) -> list[tuple[str, dict | None]]:

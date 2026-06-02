@@ -72,12 +72,15 @@ Completed:
   - 40 examples from `contract_dependent_unseen_test.jsonl`
 - Evaluated visible rule baseline and original RoBERTa on exactly the same sampled rows.
 - Implemented provider-backed OpenAI command path with strict JSON output and fail-fast credential checks.
+- Added retry/resume support after the provider-backed run encountered rate limits.
 - Generated the Stage 8 report at `docs/results/stage_8_llm_sample_baselines.md`.
 
 Current LLM status:
 
-- `OPENAI_API_KEY` was unavailable in the local environment.
-- Real zero-shot and few-shot provider-backed LLM results were not run.
+- Provider-backed `gpt-4o-mini` calls were attempted on all 120 fixed-sample examples.
+- The run remained incomplete because of heavy `429 Too Many Requests` rate limits.
+- Successful responses: zero-shot 9 / 120; few-shot 44 / 120.
+- Partial rows are documented only as incomplete diagnostics, not as a clean comparable LLM baseline.
 - Mock LLM outputs are not used as scientific evidence.
 
 Same-sample non-LLM results:
@@ -99,4 +102,4 @@ The supported conclusion is:
 
 ## Remaining Missing Item
 
-The main missing experiment is provider-backed zero-shot/few-shot LLM evaluation on the fixed Stage 8 sample. This should be run only when `OPENAI_API_KEY` is available, and the results should be clearly labeled as sampled rather than full-test results.
+There is no required remaining model experiment for final submission. The main limitation is that the provider-backed zero-shot/few-shot LLM baseline was attempted but not completed because of rate limits. Any future rerun should be quota-safe, sampled, and clearly separated from the final local encoder comparison.

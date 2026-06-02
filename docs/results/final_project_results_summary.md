@@ -124,7 +124,12 @@ The Stage 8 fixed sample protocol exists:
 
 Same-sample non-LLM results are available in `docs/results/stage_8_llm_sample_baselines.md`.
 
-Provider-backed LLM results are not available because `OPENAI_API_KEY` was unavailable. Mock LLM outputs must not be cited as scientific evidence.
+Provider-backed LLM calls were later attempted with `gpt-4o-mini`, but the run was heavily rate-limited:
+
+- zero-shot: 9 / 120 successful provider responses
+- few-shot: 44 / 120 successful provider responses
+
+The partial results are recorded in `docs/results/stage_8_llm_sample_baselines.md`, with failed transport rows counted as empty predictions. They should be treated as incomplete diagnostics, not as a clean final LLM baseline. Mock LLM outputs must not be cited as scientific evidence.
 
 ## Final Scientific Interpretation
 
