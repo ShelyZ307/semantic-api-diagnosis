@@ -11,6 +11,9 @@ from semantic_api_diagnosis.training.train_distilbert import (
 )
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+
 def test_limit_records_uses_deterministic_first_n() -> None:
     records = [{"id": index} for index in range(5)]
 
@@ -107,7 +110,7 @@ def test_evaluate_finetuned_model_fails_clearly_for_missing_model(tmp_path) -> N
             "--output-jsonl",
             str(output_path),
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         capture_output=True,
         text=True,
     )
@@ -117,7 +120,7 @@ def test_evaluate_finetuned_model_fails_clearly_for_missing_model(tmp_path) -> N
 
 
 def _load_evaluation_script():
-    path = Path("/Users/shelyz/Documents/semantic-api-diagnosis/scripts/evaluate_finetuned_model.py")
+    path = PROJECT_ROOT / "scripts" / "evaluate_finetuned_model.py"
     spec = importlib.util.spec_from_file_location("evaluate_finetuned_model", path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
