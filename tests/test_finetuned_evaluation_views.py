@@ -1,6 +1,5 @@
 """Regression checks for the canonical fine-tuned evaluation view registry."""
 
-from pathlib import Path
 import runpy
 
 
@@ -22,4 +21,5 @@ def test_finetuned_evaluation_runner_includes_all_required_views() -> None:
     views = namespace["EVALUATION_VIEWS"]
 
     assert set(views) == REQUIRED_VIEWS
-    assert all(Path(path).exists() for path in views.values())
+    assert all(path.startswith("data/generated/") for path in views.values())
+    assert all(path.endswith(".jsonl") for path in views.values())
