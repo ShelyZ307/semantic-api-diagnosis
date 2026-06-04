@@ -1,7 +1,7 @@
 [project]
 name = "semantic-api-diagnosis"
 version = "0.1.0"
-description = "Skeleton for generating and validating NLP datasets for semantic API diagnosis."
+description = "Controlled NLP benchmark for semantic API request diagnosis from natural-language endpoint contracts."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
