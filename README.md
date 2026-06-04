@@ -1,73 +1,119 @@
 # Semantic API Request Diagnosis
 
-This project investigates whether language models can diagnose semantic API request errors from partial or natural-language endpoint contracts.
+[![CI](https://github.com/ShelyZ307/semantic-api-diagnosis/actions/workflows/ci.yml/badge.svg)](https://github.com/ShelyZ307/semantic-api-diagnosis/actions/workflows/ci.yml)
 
-The task is formulated as multi-label classification over API request error labels, with secondary predictions for request validity and severity. The central focus is semantic error diagnosis and generalization to held-out unseen endpoint families.
+**Semantic API Request Diagnosis from Partial or Natural-Language Endpoint Contracts**
 
-## Research Question
+This repository contains a controlled NLP benchmark for diagnosing API request errors from partial or natural-language endpoint contracts. The project focuses on cases where a request may look structurally valid but still violates semantic rules expressed in natural language.
 
-Can fine-tuned language models diagnose semantic API request errors from partial or natural-language endpoint contracts, and generalize to unseen endpoint families, better than rule-based validation and zero/few-shot LLM baselines?
+The core question is whether language models can use endpoint-contract text to identify semantic API request errors, and whether that behavior generalizes to endpoint families that were held out during training.
 
-## Task Formulation
+---
 
-Each example contains:
+## What the model receives
 
-- an endpoint contract with natural-language constraints
-- an API request
-- a serialized text input for models
-- target labels containing `validity`, `error_labels`, and `severity_bucket`
+Each example is serialized as text and contains:
 
-Primary task: multi-label classification over `error_labels`.
+- an endpoint description
+- natural-language constraints
+- method, URL, authentication state, query parameters, and body fields
+
+Example constraint:
+
+```text
+The requested refund must not be greater than the original payment.
+```
+
+Example request pattern:
+
+```text
+Method: POST
+URL: /orders/839/refunds
+Authentication: provided
+Body fields:
+- refund_amount: 120
+- original_payment: 80
+- order_status: paid
+```
+
+The expected output is structured diagnosis:
+
+```json
+{
+  "validity": "invalid",
+  "error_labels": ["semantic_domain_constraint_violation"],
+  "severity_bucket": "high"
+}
+```
+
+---
+
+## Task formulation
+
+Primary task:
+
+- multi-label classification over API request error labels
 
 Secondary tasks:
 
 - binary validity prediction
 - severity bucket prediction
 
-## Label Taxonomy
+The fixed Version 1 label taxonomy contains 10 labels:
 
-- `missing_required_field`
-- `wrong_type`
-- `invalid_value_range`
-- `malformed_url`
-- `wrong_http_method`
-- `missing_authentication`
-- `unexpected_or_malformed_body_structure`
-- `semantic_cross_field_violation`
-- `semantic_domain_constraint_violation`
-- `semantic_state_violation`
+| Type | Labels |
+|---|---|
+| Structural / contract errors | `missing_required_field`, `wrong_type`, `invalid_value_range`, `malformed_url`, `wrong_http_method`, `missing_authentication`, `unexpected_or_malformed_body_structure` |
+| Semantic errors | `semantic_cross_field_violation`, `semantic_domain_constraint_violation`, `semantic_state_violation` |
 
-`invalid_value_range` covers constrained values that are invalid for the contract. In Version 1 this includes numeric values outside an allowed range, enum/category values outside the allowed set, and unsupported values for constrained fields such as unknown appointment types, plans, priorities, roles, or payment methods.
+---
 
-## Current Status
+## Why this is not ordinary API validation
 
-- Controlled synthetic dataset generator implemented
-- 5 seen endpoint families implemented
-- 5 held-out unseen endpoint families implemented
-- Final Version 1 dataset generated locally
-- Leakage, duplicate, overlap, and shortcut checks passed
-- Baseline evaluation framework implemented
-- Contract-dependent hard subsets created
-- Contract-dependence tightening with visible per-example policy counterfactuals implemented
-- DistilBERT and RoBERTa fine-tuning implemented and run
-- Validation-tuned encoder evaluation implemented for full, hard-subset, and shortcut views
-- Positive-class-weighted RoBERTa tried once and rejected as an improvement because it overpredicts semantic errors
-- Fixed 120-example Stage 8 LLM sample protocol implemented
-- Provider-backed zero-shot/few-shot LLM calls were attempted on the fixed Stage 8 sample, but heavy rate limits left the run incomplete; partial rows are documented only as diagnostics
+The project does not claim novelty in schema validation, malformed JSON detection, OpenAPI validation, real API execution, or security filtering.
 
-## Main Findings
+The contribution is a controlled benchmark and analysis framework for **contract-dependent semantic API diagnosis**:
 
-The honest Version 1 conclusion is narrower than the original hoped-for claim:
+- labels are generated by controlled error injection, not free-form LLM guessing
+- hidden validators are used for dataset construction and auditing only
+- models receive natural-language contract text, not executable validators
+- train/validation/seen-test splits use seen endpoint families
+- the unseen test split uses disjoint held-out endpoint families
+- shortcut views test whether a model still works when constraint text is removed
 
-- RoBERTa learns contract-sensitive behavior and performs strongly on seen endpoint families.
-- Removing contract text sharply hurts RoBERTa semantic performance, especially on seen-family examples.
-- RoBERTa does not solve unseen-family semantic generalization.
-- RoBERTa does not beat the visible rule-based baseline on unseen semantic diagnosis.
-- The benchmark reveals that many examples are request-obvious; the most scientifically useful cases are the contract-dependent hard subsets and shortcut ablations.
+---
 
-The project contribution is therefore a controlled benchmark and analysis framework for contract-dependent semantic API diagnosis, not a claim that fine-tuned encoders fully solve held-out endpoint-family reasoning.
+## Current Version 1 status
 
-## Endpoint Families
+Implemented:
+
+- controlled synthetic dataset generator
+- 5 seen endpoint families
+- 5 held-out unseen endpoint families
+- final Version 1 dataset generation pipeline
+- leakage, duplicate, overlap, and shortcut checks
+- majority, family-frequency, and visible rule-based baselines
+- contract-dependent hard subsets
+- DistilBERT and RoBERTa fine-tuning pipelines
+- validation-tuned encoder evaluation
+- fixed-sample LLM baseline protocol
+- documentation and result summaries under `docs/`
+
+Important honesty note:
+
+- DistilBERT and RoBERTa were trained and evaluated for Version 1.
+- RoBERTa shows contract-sensitive behavior and performs strongly on seen endpoint families.
+- RoBERTa does **not** solve unseen-family semantic generalization.
+- RoBERTa does **not** beat the visible rule-based baseline on unseen semantic diagnosis.
+- Provider-backed zero-shot/few-shot LLM calls were attempted on the fixed Stage 8 sample, but heavy rate limits left them incomplete. Those partial rows are documented only as diagnostics, not as clean comparable LLM evidence.
+
+The final project claim is therefore intentionally narrow:
+
+> This project contributes a reproducible benchmark, data-generation pipeline, quality gates, baselines, shortcut ablations, and error analysis for semantic API request diagnosis. It does not claim that the trained encoders fully solve held-out endpoint-family reasoning.
+
+---
+
+## Endpoint families
 
 Seen families:
 
@@ -85,54 +131,63 @@ Held-out unseen families:
 - `shipping_returns`
 - `subscription_plan_changes`
 
-## Dataset Splits
+---
+
+## Dataset splits
 
 The frozen Version 1 dataset is generated locally under `data/generated/`:
 
-- `final_train.jsonl`: 3000 examples
-- `final_validation.jsonl`: 500 examples
-- `final_seen_test.jsonl`: 700 examples
-- `final_unseen_family_test.jsonl`: 700 examples
+| Split | Examples | Families |
+|---|---:|---|
+| `final_train.jsonl` | 3000 | seen only |
+| `final_validation.jsonl` | 500 | seen only |
+| `final_seen_test.jsonl` | 700 | seen only |
+| `final_unseen_family_test.jsonl` | 700 | unseen only |
+| **Total** | **4900** | seen + held-out unseen |
 
-Full generated JSONL files are intentionally ignored by git. Small representative samples live in `data/samples/`, and the full dataset can be regenerated with the commands below.
+Full generated JSONL files are intentionally ignored by git. Small representative samples can live under `data/samples/`, and the full dataset can be regenerated with the commands below.
 
-## Project Structure
+---
+
+## Project structure
 
 ```text
 semantic-api-diagnosis/
 ├── semantic_api_diagnosis/          # Core package
-├── scripts/                         # Generation, audit, leakage, and evaluation CLIs
+├── scripts/                         # Generation, audit, leakage, baseline, and training CLIs
 ├── tests/                           # Unit and integration tests
 ├── data/
 │   ├── samples/                     # Small checked-in representative samples
 │   ├── generated/                   # Local generated datasets and reports, ignored by git
 │   ├── processed/                   # Local processed artifacts, ignored by git
 │   └── raw/                         # Local raw artifacts, ignored by git
-├── docs/
-│   └── results/                     # Checked-in summary reports
+├── docs/                            # Project summaries and reviewer-facing documentation
+│   └── results/                     # Checked-in result reports
 ├── configs/
-├── README.md
 ├── pyproject.toml
-└── .gitignore
+└── README.md
 ```
 
-## Install
+---
+
+## Quickstart
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -e ".[dev]"
-```
-
-Core generation, baseline, and test code use the Python standard library plus `pytest`. Real encoder training/evaluation additionally requires the optional `train` dependencies.
-
-## Running Tests
-
-```bash
 python3 -m pytest
 ```
 
-## Generate the Final Dataset
+Core generation, baseline, and test code use the Python standard library plus `pytest`. Real encoder training and evaluation additionally require the optional `train` dependencies:
+
+```bash
+python3 -m pip install -e ".[train]"
+```
+
+---
+
+## Regenerate the final dataset
 
 Use the joint final-split generator instead of generating each split independently. It rejects cross-split near-duplicate serialized inputs before writing final files.
 
@@ -146,7 +201,9 @@ python3 scripts/generate_final_dataset.py \
   --seed 101
 ```
 
-## Quality Checks
+---
+
+## Run quality checks
 
 ```bash
 python3 scripts/check_cross_split_leakage.py --splits \
@@ -160,7 +217,9 @@ python3 scripts/check_seen_unseen_overlap.py \
   --unseen data/generated/final_unseen_family_test.jsonl
 ```
 
-## Baseline Evaluation
+---
+
+## Run baseline evaluation
 
 ```bash
 python3 scripts/evaluate_baselines.py \
@@ -173,7 +232,9 @@ python3 scripts/evaluate_baselines.py \
 
 Reports include all-label micro/macro F1, per-label F1, semantic-only F1, exact-match label-set accuracy, validity accuracy, severity accuracy, and critical semantic-error miss rate.
 
-## Contract-Dependent Hard Subsets
+---
+
+## Analyze contract-dependent subsets
 
 ```bash
 python3 scripts/analyze_contract_dependence.py \
@@ -183,39 +244,21 @@ python3 scripts/analyze_contract_dependence.py \
   --output data/generated/contract_dependence_report.md
 ```
 
-Model results are reported on both full test sets and contract-dependent hard subsets.
+Model results should be reported on:
 
-The Version 1 tightening comparison is recorded in
-`docs/results/contract_dependence_tightening_report.md`. Request-only and
-no-constraints views now show a substantial semantic-performance decrease
-relative to full contract input.
+- full `seen_test`
+- full `unseen_family_test`
+- `contract_dependent_seen_test`
+- `contract_dependent_unseen_test`
+- shortcut views such as `request_only` and `no_constraints`
 
-## LLM Baseline Samples
+The Version 1 tightening comparison is recorded in `docs/results/contract_dependence_tightening_report.md`.
 
-LLM baseline infrastructure supports mock and dry-run modes. Tests do not require real API calls or credentials.
+---
 
-```bash
-python3 scripts/run_llm_baseline.py \
-  --mode zero_shot \
-  --provider mock \
-  --model mock-model \
-  --input data/generated/final_seen_test.jsonl \
-  --sample-size 10 \
-  --output data/generated/llm_zero_shot_seen_mock_predictions.jsonl \
-  --seed 201
+## Fine-tuning and encoder evaluation
 
-python3 scripts/evaluate_llm_predictions.py \
-  --predictions data/generated/llm_zero_shot_seen_mock_predictions.jsonl \
-  --output data/generated/llm_zero_shot_seen_mock_results.json
-```
-
-Few-shot demonstrations must come from training examples only. Do not include validation, seen-test, unseen-family-test, or unseen-family examples as demonstrations.
-
-## Stage 6: Fine-Tuning
-
-Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on encoder models such as DistilBERT and RoBERTa.
-
-The fine-tuning pipeline performs multi-label classification over the fixed error-label taxonomy. DistilBERT and RoBERTa were both trained and evaluated for Version 1. Full generated datasets and model checkpoints are not committed to git; regenerate the datasets locally before rerunning training.
+Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on local encoder models such as DistilBERT and RoBERTa.
 
 Dry-run command:
 
@@ -225,32 +268,6 @@ python3 scripts/train_distilbert.py \
   --validation data/generated/final_validation.jsonl \
   --dry-run true
 ```
-
-Optional training dependencies can be installed with:
-
-```bash
-python3 -m pip install -e ".[train]"
-```
-
-### Stage 6B: Tiny Smoke Training
-
-This is only a pipeline smoke test. It is not the final reported model. Outputs are intentionally ignored by git.
-
-```bash
-python3 scripts/train_distilbert.py \
-  --train data/generated/final_train.jsonl \
-  --validation data/generated/final_validation.jsonl \
-  --model-name distilbert-base-uncased \
-  --output-dir outputs/distilbert_smoke \
-  --epochs 1 \
-  --batch-size 4 \
-  --max-length 256 \
-  --max-train-examples 32 \
-  --max-validation-examples 16 \
-  --dry-run false
-```
-
-### Stage 6C: Full Encoder Training And Evaluation
 
 Reproduce the full DistilBERT experiment:
 
@@ -274,7 +291,7 @@ python3 scripts/run_finetuned_evaluation.py \
   --max-length 512
 ```
 
-Reproduce the RoBERTa experiment using the same generated train and validation splits:
+Reproduce the RoBERTa experiment:
 
 ```bash
 python3 scripts/train_roberta.py \
@@ -296,48 +313,15 @@ python3 scripts/run_finetuned_evaluation.py \
   --max-length 512
 ```
 
-The smaller RoBERTa batch size is the CPU-friendly setting used for the Version 1 local run. Each evaluator run tunes per-label thresholds on `final_validation.jsonl` only, saves them to `thresholds.json`, and applies them unchanged to full, contract-dependent, and shortcut-ablation test views.
+The smaller RoBERTa batch size is the CPU-friendly setting used for the Version 1 local run. Each evaluator run tunes per-label thresholds on `final_validation.jsonl` only, saves them to `thresholds.json`, and applies them unchanged to full, hard-subset, and shortcut-ablation test views.
 
-### Stage 7: Controlled LLM And Weighted-Loss Comparison
+---
 
-Provider-backed OpenAI samples require `OPENAI_API_KEY`. The controlled runner evaluates zero-shot and few-shot prompts on sampled seen, unseen-family, and contract-dependent unseen examples. Raw responses, parsed predictions, failures, and metrics are saved under `data/generated/stage7_llm/`. No provider-backed LLM result is included unless this command is run with real credentials.
+## Fixed-sample LLM baselines
 
-```bash
-python3 scripts/run_stage7_llm_baselines.py \
-  --provider openai \
-  --model gpt-4o-mini \
-  --sample-size 40
-```
+LLM baseline infrastructure supports mock and dry-run modes. Tests do not require real API calls or credentials.
 
-The single positive-class-weighted RoBERTa comparison was run and rejected as an improvement. It reduced critical semantic misses by predicting semantic labels too broadly, which severely hurt precision, exact match, and overall micro-F1. Reproduce it with:
-
-```bash
-python3 scripts/train_roberta.py \
-  --train data/generated/final_train.jsonl \
-  --validation data/generated/final_validation.jsonl \
-  --model-name roberta-base \
-  --output-dir outputs/roberta_weighted_v1_seed42 \
-  --epochs 3 \
-  --batch-size 4 \
-  --max-length 512 \
-  --seed 42 \
-  --loss-mode pos_weighted \
-  --save-final-model true \
-  --dry-run false
-
-python3 scripts/run_finetuned_evaluation.py \
-  --model-dir outputs/roberta_weighted_v1_seed42/model \
-  --output-dir outputs/roberta_weighted_v1_seed42/evaluation \
-  --threshold-mode per_label \
-  --max-length 512
-
-python3 scripts/analyze_stage7_unseen_errors.py
-python3 scripts/generate_stage7_report.py
-```
-
-### Stage 8: Fixed Sample LLM Baselines
-
-Create the fixed cost-controlled sample and evaluate non-LLM baselines on exactly the same rows:
+Create the fixed cost-controlled Stage 8 sample and evaluate non-LLM baselines on exactly the same rows:
 
 ```bash
 python3 scripts/create_stage8_llm_sample.py \
@@ -349,57 +333,28 @@ python3 scripts/evaluate_stage8_sample_non_llm.py \
   --output data/generated/stage8_llm_sample/non_llm_sample_metrics.json
 ```
 
-Provider-backed LLM calls require `OPENAI_API_KEY`. A `gpt-4o-mini` run was attempted on the fixed Stage 8 sample, but heavy `429 Too Many Requests` rate limits left it incomplete: zero-shot produced 9 / 120 successful responses, and few-shot produced 44 / 120 successful responses. The checked-in report treats those rows as partial diagnostics only, not as a clean comparable LLM baseline. Mock outputs remain excluded from scientific claims.
+Provider-backed LLM calls require `OPENAI_API_KEY`. A `gpt-4o-mini` run was attempted on the fixed Stage 8 sample, but rate limits left it incomplete: zero-shot produced 9 / 120 successful responses, and few-shot produced 44 / 120 successful responses. The checked-in report treats those rows as partial diagnostics only, not as a clean comparable LLM baseline.
 
-If a future run is intentionally resumed with adequate quota, use the retry/resume flags and keep the result clearly labeled as sampled:
+---
 
-```bash
-python3 scripts/run_llm_baseline.py \
-  --mode zero_shot \
-  --provider openai \
-  --model gpt-4o-mini \
-  --input data/generated/stage8_llm_sample/combined_sample.jsonl \
-  --sample-size 120 \
-  --output data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
-  --seed 808 \
-  --timeout 60 \
-  --resume true \
-  --max-retries 5 \
-  --retry-initial-sleep 60 \
-  --sleep-between-calls 2
+## Documentation map
 
-python3 scripts/run_llm_baseline.py \
-  --mode few_shot \
-  --provider openai \
-  --model gpt-4o-mini \
-  --input data/generated/stage8_llm_sample/combined_sample.jsonl \
-  --train data/generated/final_train.jsonl \
-  --sample-size 120 \
-  --output data/generated/stage8_llm_sample/few_shot_predictions.jsonl \
-  --seed 808 \
-  --timeout 60 \
-  --resume true \
-  --max-retries 5 \
-  --retry-initial-sleep 60 \
-  --sleep-between-calls 2
+Recommended reading order:
 
-python3 scripts/evaluate_stage8_llm_sample_predictions.py \
-  --predictions data/generated/stage8_llm_sample/zero_shot_predictions.jsonl \
-  --output data/generated/stage8_llm_sample/zero_shot_metrics.json
+1. `docs/SUBMISSION_SUMMARY.md` — concise reviewer-facing summary.
+2. `docs/README.md` — documentation index.
+3. `docs/results/baseline_results.md` — baseline metrics and contract-dependent subsets.
+4. `docs/results/contract_dependence_tightening_report.md` — shortcut-ablation tightening and quality gates.
 
-python3 scripts/evaluate_stage8_llm_sample_predictions.py \
-  --predictions data/generated/stage8_llm_sample/few_shot_predictions.jsonl \
-  --output data/generated/stage8_llm_sample/few_shot_metrics.json
+---
 
-python3 scripts/generate_stage8_llm_sample_report.py
-```
+## Remaining work before final submission
 
-## Documentation
+Do not expand the project scope. The safest remaining work is polishing the final report and slides around the existing evidence:
 
-See `docs/` for stage summaries and `docs/results/` for checked-in baseline, contract-dependence, fine-tuned model, weighted-loss, Stage 8 sample-protocol, and final summary reports.
+- emphasize the benchmark and evaluation framework
+- report full, hard-subset, and shortcut-ablation results together
+- be explicit that provider-backed LLM samples were incomplete
+- do not present mock LLM outputs or partial provider rows as clean scientific evidence
+- keep the conclusion honest: strong benchmark and analysis, limited unseen-family model success
 
-## Remaining Work
-
-Before final submission, do not expand the experiment scope. The provider-backed Stage 8 LLM attempt should remain documented as incomplete unless a future quota-safe rerun is explicitly planned. Do not present mock LLM results or partial provider rows as clean scientific evidence.
-
-We did not pursue proprietary OpenAI fine-tuning because it would introduce a substantially different training/evaluation pipeline, additional cost/quota risks, and less transparent comparability with local encoder fine-tuning. The final project prioritizes reproducible local encoder fine-tuning, shortcut ablations, contract-dependent evaluation, and error analysis.
