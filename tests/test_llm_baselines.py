@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 from semantic_api_diagnosis.data_generation.generate import generate_examples
 from semantic_api_diagnosis.dataset_plan import PLANNED_UNSEEN_ENDPOINT_FAMILIES
@@ -12,6 +13,9 @@ from semantic_api_diagnosis.llm_baselines.prompts import (
 )
 from semantic_api_diagnosis.llm_baselines.runner import LLMRunner, _response_output_text
 from semantic_api_diagnosis.serialization.jsonl import read_jsonl, write_jsonl
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_zero_shot_prompt_contains_taxonomy_and_serialized_input() -> None:
@@ -134,7 +138,7 @@ def test_run_llm_baseline_script_mock_mode_on_tiny_file(tmp_path) -> None:
             "--seed",
             "201",
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
@@ -175,7 +179,7 @@ def test_evaluate_llm_predictions_reports_parse_error_rate(tmp_path) -> None:
             "--output",
             str(output_path),
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
