@@ -2,6 +2,7 @@ import inspect
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 from semantic_api_diagnosis.baselines.family_frequency import FamilyFrequencyBaseline
 from semantic_api_diagnosis.baselines.majority import MajorityBaseline
@@ -10,6 +11,9 @@ import semantic_api_diagnosis.baselines.visible_rule_based as visible_rule_based
 from semantic_api_diagnosis.data_generation.generate import generate_examples
 from semantic_api_diagnosis.evaluation.metrics import evaluate_predictions
 from semantic_api_diagnosis.serialization.jsonl import write_jsonl
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_metrics_compute_on_toy_multilabel_example() -> None:
@@ -117,7 +121,7 @@ def test_evaluator_script_runs_and_writes_json_and_markdown(tmp_path) -> None:
             "--output",
             str(output_path),
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
@@ -154,7 +158,7 @@ def test_evaluator_includes_hard_subset_sections_when_files_exist(tmp_path) -> N
             "--output",
             str(output_path),
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
@@ -187,7 +191,7 @@ def test_evaluator_missing_hard_subsets_message_is_clear(tmp_path) -> None:
             "--output",
             str(output_path),
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
