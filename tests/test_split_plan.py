@@ -1,8 +1,12 @@
 import subprocess
 import sys
+from pathlib import Path
 
 from semantic_api_diagnosis.data_generation.generate import generate_examples
 from semantic_api_diagnosis.dataset_plan import implemented_seen_families, implemented_unseen_families
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_split_argument_is_accepted() -> None:
@@ -56,7 +60,7 @@ def test_unseen_family_test_uses_only_implemented_unseen_families() -> None:
 def test_print_dataset_plan_script_runs_successfully() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/print_dataset_plan.py"],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,

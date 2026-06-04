@@ -1,5 +1,5 @@
 import argparse
-import importlib.util
+import runpy
 import subprocess
 import sys
 from pathlib import Path
@@ -73,7 +73,7 @@ def test_positive_class_weights_use_negative_to_positive_ratio() -> None:
 
 
 def test_prediction_row_formatting_and_metrics() -> None:
-    module = _load_evaluation_script()
+    module = _load_evaluation_script_namespace()
     example = {
         "id": "ex_1",
         "serialized_input": "text",
@@ -81,8 +81,8 @@ def test_prediction_row_formatting_and_metrics() -> None:
     }
     scores = [0.9, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 
-    row = module.format_prediction_row(example, scores, threshold=0.5)
-    metrics = module.compute_metrics_for_prediction_rows([row])
+    row = module["format_prediction_row"](example, scores, threshold=0.5)
+    metrics = module["compute_metrics_for_prediction_rows"]([row])
 
     assert row["id"] == "ex_1"
     assert row["gold_error_labels"] == ["missing_required_field"]
@@ -119,10 +119,6 @@ def test_evaluate_finetuned_model_fails_clearly_for_missing_model(tmp_path) -> N
     assert "No trained model found" in result.stderr
 
 
-def _load_evaluation_script():
+def _load_evaluation_script_namespace() -> dict:
     path = PROJECT_ROOT / "scripts" / "evaluate_finetuned_model.py"
-    spec = importlib.util.spec_from_file_location("evaluate_finetuned_model", path)
-    module = importlib.util.module_from_spec(spec)
-    assert spec.loader is not None
-    spec.loader.exec_module(module)
-    return module
+    return runpy.run_path(str(path))

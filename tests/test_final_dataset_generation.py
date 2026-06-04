@@ -1,9 +1,13 @@
 import subprocess
 import sys
+from pathlib import Path
 
 from semantic_api_diagnosis.dataset_plan import implemented_seen_families, implemented_unseen_families
 from semantic_api_diagnosis.quality_gate import cross_split_leakage_report, duplicate_report
 from semantic_api_diagnosis.serialization.jsonl import read_jsonl
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_generate_final_dataset_script_creates_all_splits_with_strict_leakage_pass(tmp_path) -> None:
@@ -24,7 +28,7 @@ def test_generate_final_dataset_script_creates_all_splits_with_strict_leakage_pa
             "--seed",
             "101",
         ],
-        cwd="/Users/shelyz/Documents/semantic-api-diagnosis",
+        cwd=PROJECT_ROOT,
         check=True,
         capture_output=True,
         text=True,
