@@ -18,7 +18,7 @@ Version 1 uses the tightened contract-dependence dataset without adding endpoint
 - Training: three epochs, fixed seed `42`, maximum sequence length `512`, validation on `final_validation.jsonl` only. DistilBERT used batch size `16`; RoBERTa used the CPU-feasible batch size `4`.
 - Thresholding: per-label thresholds selected on validation macro-F1 and reused unchanged for every test and shortcut view.
 - Auxiliary validity and severity metrics are derived from predicted error labels; there are no separate auxiliary heads.
-- LLM baseline code exists, but no real provider-backed zero-shot or few-shot result is available. Mock output is excluded from scientific comparisons.
+- Provider-backed LLM infrastructure exists. A `gpt-4o-mini` run was attempted on a fixed sample, but rate limits left it incomplete. Therefore, partial provider rows are documented only as diagnostics and are excluded from clean model comparison tables.
 
 ## Main Results
 
@@ -45,7 +45,7 @@ Version 1 uses the tightened contract-dependence dataset without adding endpoint
 | contract_dependent_unseen_test | zero-shot LLM | n/a | n/a | n/a | n/a | n/a |
 | contract_dependent_unseen_test | few-shot LLM | n/a | n/a | n/a | n/a | n/a |
 
-Real zero-shot and few-shot LLM values are `n/a` because the current scaffold has no provider-backed experiment artifact.
+Real zero-shot and few-shot LLM values are `n/a` in this clean comparison table because the attempted provider-backed run was incomplete.
 
 ## Threshold Comparison
 

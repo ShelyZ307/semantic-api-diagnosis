@@ -105,7 +105,7 @@ Important honesty note:
 - RoBERTa shows contract-sensitive behavior and performs strongly on seen endpoint families.
 - RoBERTa does **not** solve unseen-family semantic generalization.
 - RoBERTa does **not** beat the visible rule-based baseline on unseen semantic diagnosis.
-- Provider-backed zero-shot/few-shot LLM calls were attempted on the fixed Stage 8 sample, but heavy rate limits left them incomplete. Those partial rows are documented only as diagnostics, not as clean comparable LLM evidence.
+- Provider-backed LLM infrastructure exists. A `gpt-4o-mini` run was attempted on a fixed sample, but rate limits left it incomplete. Therefore, partial provider rows are documented only as diagnostics and are excluded from clean model comparison tables.
 
 The final project claim is therefore intentionally narrow:
 
@@ -333,7 +333,7 @@ python3 scripts/evaluate_stage8_sample_non_llm.py \
   --output data/generated/stage8_llm_sample/non_llm_sample_metrics.json
 ```
 
-Provider-backed LLM calls require `OPENAI_API_KEY`. A `gpt-4o-mini` run was attempted on the fixed Stage 8 sample, but rate limits left it incomplete: zero-shot produced 9 / 120 successful responses, and few-shot produced 44 / 120 successful responses. The checked-in report treats those rows as partial diagnostics only, not as a clean comparable LLM baseline.
+Provider-backed LLM infrastructure exists. A `gpt-4o-mini` run was attempted on a fixed sample, but rate limits left it incomplete. Therefore, partial provider rows are documented only as diagnostics and are excluded from clean model comparison tables.
 
 ---
 
@@ -357,4 +357,3 @@ Do not expand the project scope. The safest remaining work is polishing the fina
 - be explicit that provider-backed LLM samples were incomplete
 - do not present mock LLM outputs or partial provider rows as clean scientific evidence
 - keep the conclusion honest: strong benchmark and analysis, limited unseen-family model success
-
