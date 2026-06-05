@@ -122,4 +122,4 @@ This report compares the original and positive-class-weighted RoBERTa checkpoint
 - Truncation is not a plausible explanation: no unseen example exceeds `max_length=512`.
 - Original RoBERTa shows semantic-label confusion: cross-field violations are sometimes predicted as state violations, while valid or non-semantic rows can receive cross-field or state predictions.
 - Weighted loss is rejected as an improvement. It removes semantic false negatives by predicting violations broadly, increasing semantic false positives from `87` to `1662`.
-- A later provider-backed Stage 8 LLM sample run was attempted, but it remained incomplete because of rate limits, so LLM baselines do not change the current conclusion.
+- A later provider-backed Stage 8 LLM sample run completed on the fixed 120-example sample, but it remains a sampled baseline and does not change the current unseen-family conclusion.

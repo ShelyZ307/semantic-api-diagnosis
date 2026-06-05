@@ -78,9 +78,9 @@ Completed:
 Current LLM status:
 
 - Provider-backed `gpt-4o-mini` calls were attempted on all 120 fixed-sample examples.
-- The run remained incomplete because of heavy `429 Too Many Requests` rate limits.
-- Successful responses: zero-shot 9 / 120; few-shot 44 / 120.
-- Partial rows are documented only as incomplete diagnostics, not as a clean comparable LLM baseline.
+- A later quota-safe resume completed the fixed sample with no transport or parse failures.
+- Successful responses: zero-shot 120 / 120; few-shot 120 / 120.
+- Results are documented as a clean fixed-sample LLM baseline, not as a full-test LLM benchmark.
 - Mock LLM outputs are not used as scientific evidence.
 
 Same-sample non-LLM results:
@@ -102,4 +102,4 @@ The supported conclusion is:
 
 ## Remaining Missing Item
 
-There is no required remaining model experiment for final submission. The main limitation is that the provider-backed zero-shot/few-shot LLM baseline was attempted but not completed because of rate limits. Any future rerun should be quota-safe, sampled, and clearly separated from the final local encoder comparison.
+There is no required remaining model experiment for final submission. The provider-backed zero-shot/few-shot LLM baseline is now complete only for the fixed Stage 8 sample; it should remain clearly separated from the full-test local encoder comparison.

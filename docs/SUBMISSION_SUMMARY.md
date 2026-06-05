@@ -166,7 +166,7 @@ The honest conclusion is intentionally narrow:
 - RoBERTa learns contract-sensitive behavior and performs strongly on seen endpoint families.
 - RoBERTa does not solve unseen-family semantic generalization.
 - RoBERTa does not beat the visible rule-based baseline on unseen semantic diagnosis.
-- Provider-backed Stage 8 LLM calls were attempted but remained incomplete because of rate limits; partial provider rows are treated only as diagnostics.
+- Provider-backed Stage 8 `gpt-4o-mini` zero-shot and few-shot calls completed on the fixed 120-example sample; they are treated as sampled baselines, not full-test LLM evidence.
 
 Final claim:
 

@@ -105,7 +105,7 @@ Important honesty note:
 - RoBERTa shows contract-sensitive behavior and performs strongly on seen endpoint families.
 - RoBERTa does **not** solve unseen-family semantic generalization.
 - RoBERTa does **not** beat the visible rule-based baseline on unseen semantic diagnosis.
-- Provider-backed LLM infrastructure exists. A `gpt-4o-mini` run was attempted on a fixed sample, but rate limits left it incomplete. Therefore, partial provider rows are documented only as diagnostics and are excluded from clean model comparison tables.
+- Provider-backed `gpt-4o-mini` zero-shot and few-shot baselines were completed on the fixed 120-example Stage 8 sample. These rows support only a sampled comparison, not a full-test LLM benchmark.
 
 The final project claim is therefore intentionally narrow:
 
@@ -333,7 +333,7 @@ python3 scripts/evaluate_stage8_sample_non_llm.py \
   --output data/generated/stage8_llm_sample/non_llm_sample_metrics.json
 ```
 
-Provider-backed LLM infrastructure exists. A `gpt-4o-mini` run was attempted on a fixed sample, but rate limits left it incomplete. Therefore, partial provider rows are documented only as diagnostics and are excluded from clean model comparison tables.
+Provider-backed `gpt-4o-mini` zero-shot and few-shot baselines were completed on the fixed 120-example Stage 8 sample. The sampled LLM comparison is reported in `docs/results/stage_8_llm_sample_baselines.md`; it complements but does not replace the full-test encoder and rule-baseline evaluation.
 
 ---
 
@@ -354,6 +354,6 @@ Do not expand the project scope. The safest remaining work is polishing the fina
 
 - emphasize the benchmark and evaluation framework
 - report full, hard-subset, and shortcut-ablation results together
-- be explicit that provider-backed LLM samples were incomplete
-- do not present mock LLM outputs or partial provider rows as clean scientific evidence
+- be explicit that provider-backed LLM results are fixed-sample, not full-test, baselines
+- do not present mock LLM outputs as scientific evidence
 - keep the conclusion honest: strong benchmark and analysis, limited unseen-family model success

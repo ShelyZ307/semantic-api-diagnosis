@@ -124,12 +124,12 @@ The Stage 8 fixed sample protocol exists:
 
 Same-sample non-LLM results are available in `docs/results/stage_8_llm_sample_baselines.md`.
 
-Provider-backed LLM calls were later attempted with `gpt-4o-mini`, but the run was heavily rate-limited:
+Provider-backed LLM calls were completed with `gpt-4o-mini` on the same fixed sample:
 
-- zero-shot: 9 / 120 successful provider responses
-- few-shot: 44 / 120 successful provider responses
+- zero-shot: 120 / 120 successful provider responses
+- few-shot: 120 / 120 successful provider responses
 
-The partial results are recorded in `docs/results/stage_8_llm_sample_baselines.md`, with failed transport rows counted as empty predictions. They should be treated as incomplete diagnostics, not as a clean final LLM baseline. Mock LLM outputs must not be cited as scientific evidence.
+The sampled results are recorded in `docs/results/stage_8_llm_sample_baselines.md`. They are clean for the fixed 120-example sample, but they remain sampled baselines and do not replace the full-test encoder and rule-baseline evaluation. Mock LLM outputs must not be cited as scientific evidence.
 
 ## Final Scientific Interpretation
 

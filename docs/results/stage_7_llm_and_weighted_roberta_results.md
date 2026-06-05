@@ -69,14 +69,14 @@
 
 ## Real LLM Baseline Status
 
-- Stage 7 itself has no clean provider-backed LLM artifacts. A later Stage 8 `gpt-4o-mini` fixed-sample run was attempted, but it remained incomplete because of heavy `429 Too Many Requests` rate limits. Mock results remain excluded from scientific comparison.
+- Stage 7 itself has no full-test provider-backed LLM artifacts. A later Stage 8 `gpt-4o-mini` fixed-sample run completed on 120 examples and is reported separately in `docs/results/stage_8_llm_sample_baselines.md`. Mock results remain excluded from scientific comparison.
 
 ## Interpretation
 
 - Original RoBERTa beats the visible rule baseline on seen full-input micro-F1 (`0.949` vs `0.804`) but not on unseen semantic diagnosis (`0.352` vs `0.957` semantic macro-F1).
 - Weighted loss changes unseen semantic macro-F1 by `-0.160`, unseen semantic-domain F1 by `+0.148`, and critical semantic miss rate by `-0.558`. It is rejected: the zero miss rate comes from broad overprediction, not better diagnosis.
 - Original RoBERTa is contract-sensitive: its semantic macro-F1 falls sharply on request-only and no-constraints views. Weighted RoBERTa loses that useful ablation pattern because its predictions are over-broad.
-- Real zero-shot and few-shot LLM comparisons remain incomplete. The later Stage 8 partial provider rows are diagnostics only and do not support a clean claim about instruction-following LLM performance.
+- Real zero-shot and few-shot LLM comparisons are available only as the later Stage 8 fixed-sample baseline. They do not replace the Stage 7 full-test encoder comparison.
 - The defensible Stage 7 conclusion is that fine-tuned RoBERTa learns contract-sensitive behavior on seen families, while unseen-family transfer remains weak and the visible rule baseline remains stronger on held-out domains.
 
 See `docs/results/stage_7_unseen_error_analysis.md` for grouped failure analysis and concrete examples.

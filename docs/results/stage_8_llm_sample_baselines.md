@@ -35,31 +35,24 @@
 
 ## Main Sampled Comparison
 
-Provider-backed OpenAI calls were attempted for all fixed-sample examples, but the run still has transport failures. Metrics below include failed transport rows as empty predictions, so they should be treated as partial-run diagnostics rather than a clean full-sample LLM baseline.
-
-Successful provider responses:
-
-- zero-shot LLM: 9 / 120
-- few-shot LLM: 44 / 120
-
 | group | model | n | micro-F1 | semantic macro-F1 | exact match | critical semantic miss rate |
 |---|---|---:|---:|---:|---:|---:|
 | seen sample | visible rule baseline | 40 | 0.864 | 0.974 | 0.775 | 0.083 |
 | seen sample | original RoBERTa | 40 | 0.955 | 0.774 | 0.900 | 0.250 |
-| seen sample | zero-shot LLM | 40 | 0.080 | 0.000 | 0.150 | 1.000 |
-| seen sample | few-shot LLM | 40 | 0.500 | 0.143 | 0.375 | 0.417 |
+| seen sample | zero-shot LLM | 40 | 0.511 | 0.157 | 0.325 | 0.250 |
+| seen sample | few-shot LLM | 40 | 0.568 | 0.125 | 0.425 | 0.250 |
 | unseen sample | visible rule baseline | 40 | 0.946 | 1.000 | 0.900 | 0.000 |
 | unseen sample | original RoBERTa | 40 | 0.789 | 0.409 | 0.675 | 0.500 |
-| unseen sample | zero-shot LLM | 40 | 0.000 | 0.000 | 0.250 | 1.000 |
-| unseen sample | few-shot LLM | 40 | 0.255 | 0.207 | 0.325 | 0.600 |
+| unseen sample | zero-shot LLM | 40 | 0.407 | 0.249 | 0.225 | 0.000 |
+| unseen sample | few-shot LLM | 40 | 0.524 | 0.194 | 0.400 | 0.100 |
 | contract-dependent unseen sample | visible rule baseline | 40 | 0.795 | 0.615 | 0.650 | 0.133 |
 | contract-dependent unseen sample | original RoBERTa | 40 | 0.457 | 0.327 | 0.250 | 0.567 |
-| contract-dependent unseen sample | zero-shot LLM | 40 | 0.107 | 0.074 | 0.000 | 0.833 |
-| contract-dependent unseen sample | few-shot LLM | 40 | 0.000 | 0.000 | 0.000 | 0.967 |
+| contract-dependent unseen sample | zero-shot LLM | 40 | 0.304 | 0.226 | 0.000 | 0.133 |
+| contract-dependent unseen sample | few-shot LLM | 40 | 0.091 | 0.053 | 0.050 | 0.200 |
 | combined sample | visible rule baseline | 120 | 0.867 | 0.947 | 0.775 | 0.096 |
 | combined sample | original RoBERTa | 120 | 0.751 | 0.591 | 0.608 | 0.481 |
-| combined sample | zero-shot LLM | 120 | 0.069 | 0.056 | 0.133 | 0.904 |
-| combined sample | few-shot LLM | 120 | 0.291 | 0.139 | 0.233 | 0.769 |
+| combined sample | zero-shot LLM | 120 | 0.401 | 0.261 | 0.183 | 0.135 |
+| combined sample | few-shot LLM | 120 | 0.392 | 0.120 | 0.292 | 0.192 |
 
 ## Per-Semantic-Label F1
 
@@ -67,38 +60,40 @@ Successful provider responses:
 |---|---|---:|---:|---:|
 | seen sample | visible rule baseline | 0.923 | 1.000 | 1.000 |
 | seen sample | original RoBERTa | 0.923 | 0.400 | 1.000 |
-| seen sample | zero-shot LLM | 0.000 | 0.000 | 0.000 |
-| seen sample | few-shot LLM | 0.429 | 0.000 | 0.000 |
+| seen sample | zero-shot LLM | 0.471 | 0.000 | 0.000 |
+| seen sample | few-shot LLM | 0.375 | 0.000 | 0.000 |
 | unseen sample | visible rule baseline | 1.000 | 1.000 | 1.000 |
 | unseen sample | original RoBERTa | 0.500 | 0.000 | 0.727 |
-| unseen sample | zero-shot LLM | 0.000 | 0.000 | 0.000 |
-| unseen sample | few-shot LLM | 0.222 | 0.400 | 0.000 |
+| unseen sample | zero-shot LLM | 0.190 | 0.333 | 0.222 |
+| unseen sample | few-shot LLM | 0.333 | 0.250 | 0.000 |
 | contract-dependent unseen sample | visible rule baseline | 0.000 | 0.846 | 1.000 |
 | contract-dependent unseen sample | original RoBERTa | 0.000 | 0.222 | 0.759 |
-| contract-dependent unseen sample | zero-shot LLM | 0.000 | 0.000 | 0.222 |
-| contract-dependent unseen sample | few-shot LLM | 0.000 | 0.000 | 0.000 |
+| contract-dependent unseen sample | zero-shot LLM | 0.000 | 0.308 | 0.370 |
+| contract-dependent unseen sample | few-shot LLM | 0.000 | 0.160 | 0.000 |
 | combined sample | visible rule baseline | 0.947 | 0.895 | 1.000 |
 | combined sample | original RoBERTa | 0.778 | 0.222 | 0.773 |
-| combined sample | zero-shot LLM | 0.000 | 0.000 | 0.167 |
-| combined sample | few-shot LLM | 0.348 | 0.069 | 0.000 |
+| combined sample | zero-shot LLM | 0.222 | 0.269 | 0.293 |
+| combined sample | few-shot LLM | 0.218 | 0.143 | 0.000 |
 
 ## LLM Parse And Usage Quality
 
 | model | group | parse failure rate | invalid JSON rate | transport error rate | usage totals |
 |---|---|---:|---:|---:|---|
-| zero-shot LLM | seen sample | 0.000 | 0.000 | 0.900 | `{'input_tokens': 2021, 'output_tokens': 88, 'total_tokens': 2109}` |
-| zero-shot LLM | unseen sample | 0.000 | 0.000 | 1.000 | `{}` |
-| zero-shot LLM | contract-dependent unseen sample | 0.000 | 0.000 | 0.875 | `{'input_tokens': 2643, 'output_tokens': 129, 'total_tokens': 2772}` |
-| zero-shot LLM | combined sample | 0.000 | 0.000 | 0.925 | `{'input_tokens': 4664, 'output_tokens': 217, 'total_tokens': 4881}` |
-| few-shot LLM | seen sample | 0.000 | 0.000 | 0.250 | `{'input_tokens': 47683, 'output_tokens': 632, 'total_tokens': 48315}` |
-| few-shot LLM | unseen sample | 0.000 | 0.000 | 0.675 | `{'input_tokens': 21348, 'output_tokens': 286, 'total_tokens': 21634}` |
-| few-shot LLM | contract-dependent unseen sample | 0.000 | 0.000 | 0.975 | `{'input_tokens': 1642, 'output_tokens': 22, 'total_tokens': 1664}` |
-| few-shot LLM | combined sample | 0.000 | 0.000 | 0.633 | `{'input_tokens': 70673, 'output_tokens': 940, 'total_tokens': 71613}` |
+| zero-shot LLM | seen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 19495, 'output_tokens': 876, 'total_tokens': 20371}` |
+| zero-shot LLM | unseen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 21405, 'output_tokens': 1001, 'total_tokens': 22406}` |
+| zero-shot LLM | contract-dependent unseen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 21359, 'output_tokens': 991, 'total_tokens': 22350}` |
+| zero-shot LLM | combined sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 62259, 'output_tokens': 2868, 'total_tokens': 65127}` |
+| few-shot LLM | seen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 63495, 'output_tokens': 848, 'total_tokens': 64343}` |
+| few-shot LLM | unseen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 65405, 'output_tokens': 856, 'total_tokens': 66261}` |
+| few-shot LLM | contract-dependent unseen sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 65359, 'output_tokens': 864, 'total_tokens': 66223}` |
+| few-shot LLM | combined sample | 0.000 | 0.000 | 0.000 | `{'input_tokens': 194259, 'output_tokens': 2568, 'total_tokens': 196827}` |
 
 ## Interpretation
 
 - On this fixed sample, original RoBERTa unseen semantic macro-F1 is `0.409` and the visible rule baseline is `1.000`.
-- The provider-backed LLM run is incomplete because of OpenAI transport errors, mostly `429 Too Many Requests`. These rows are counted as empty predictions, so the LLM numbers should be treated as partial-run diagnostics.
-- The partial-run table records zero-shot unseen semantic macro-F1 as `0.000` and few-shot as `0.207`, but these values are dominated by missing provider responses and should not be read as completed LLM baseline performance.
-- Because the provider run is incomplete, do not claim that zero-shot or few-shot LLMs definitively outperform or underperform original RoBERTa or the visible rule baseline.
+- Zero-shot LLM unseen semantic macro-F1 is `0.249`; few-shot is `0.194`.
+- zero-shot LLM does not outperform original RoBERTa on sampled unseen semantic macro-F1 (`0.249` vs `0.409`).
+- few-shot LLM does not outperform original RoBERTa on sampled unseen semantic macro-F1 (`0.194` vs `0.409`).
+- few-shot LLM does not outperform zero-shot LLM on sampled unseen semantic macro-F1 (`0.194` vs `0.249`).
+- best sampled LLM does not outperform visible rule baseline on sampled unseen semantic macro-F1 (`0.249` vs `1.000`).
 - Recommended framing: RoBERTa learns contract-sensitive behavior and performs strongly in-domain, but unseen-family transfer remains weak. The project contribution is a controlled benchmark and analysis of contract-dependent semantic API diagnosis, not a claim that encoders solve unseen semantic generalization.
