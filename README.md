@@ -342,18 +342,5 @@ Provider-backed `gpt-4o-mini` zero-shot and few-shot baselines were completed on
 Recommended reading order:
 
 1. `docs/SUBMISSION_SUMMARY.md` — concise reviewer-facing summary.
-2. `docs/README.md` — documentation index.
-3. `docs/results/baseline_results.md` — baseline metrics and contract-dependent subsets.
-4. `docs/results/contract_dependence_tightening_report.md` — shortcut-ablation tightening and quality gates.
-
----
-
-## Remaining work before final submission
-
-Do not expand the project scope. The safest remaining work is polishing the final report and slides around the existing evidence:
-
-- emphasize the benchmark and evaluation framework
-- report full, hard-subset, and shortcut-ablation results together
-- be explicit that provider-backed LLM results are fixed-sample, not full-test, baselines
-- do not present mock LLM outputs as scientific evidence
-- keep the conclusion honest: strong benchmark and analysis, limited unseen-family model success
+2. `docs/results/baseline_results.md` — baseline metrics and contract-dependent subsets.
+3. `docs/results/contract_dependence_tightening_report.md` — shortcut-ablation tightening and quality gates.
