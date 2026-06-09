@@ -1,6 +1,6 @@
 # Stage 6-8 Final Modeling And LLM Protocol
 
-This document summarizes the final modeling stages for Version 1 of Semantic API Request Diagnosis from Partial or Natural-Language Endpoint Contracts.
+This document summarizes the final modeling stages for Version 1 of Semantic API Request Diagnosis from Natural-Language Endpoint Contracts.
 
 ## Stage 6: Real Fine-Tuning And Evaluation
 

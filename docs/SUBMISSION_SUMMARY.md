@@ -2,7 +2,7 @@
 
 ## Project title
 
-**Semantic API Request Diagnosis from Partial or Natural-Language Endpoint Contracts**
+**Semantic API Request Diagnosis from Natural-Language Endpoint Contracts**
 
 ## One-sentence summary
 

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/ShelyZ307/semantic-api-diagnosis/actions/workflows/ci.yml/badge.svg)](https://github.com/ShelyZ307/semantic-api-diagnosis/actions/workflows/ci.yml)
 
-**Semantic API Request Diagnosis from Partial or Natural-Language Endpoint Contracts**
+**Semantic API Request Diagnosis from Natural-Language Endpoint Contracts**
 
 This repository contains a controlled NLP benchmark for diagnosing API request errors from partial or natural-language endpoint contracts. The project focuses on cases where a request may look structurally valid but still violates semantic rules expressed in natural language.
 
