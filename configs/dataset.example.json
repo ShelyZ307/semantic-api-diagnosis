@@ -5,6 +5,6 @@
   "error_types": [
     "missing_required_field",
     "wrong_type",
-    "semantic_mismatch"
+    "semantic_domain_constraint_violation"
   ]
 }
