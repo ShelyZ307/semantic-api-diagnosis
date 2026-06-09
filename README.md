@@ -4,7 +4,7 @@
 
 **Semantic API Request Diagnosis from Natural-Language Endpoint Contracts**
 
-This repository contains a controlled NLP benchmark for diagnosing API request errors from partial or natural-language endpoint contracts. The project focuses on cases where a request may look structurally valid but still violates semantic rules expressed in natural language.
+This repository contains a controlled NLP benchmark for diagnosing API request errors from natural-language endpoint contracts. The project focuses on cases where a request may look structurally valid but still violates semantic rules expressed in natural language.
 
 The core question is whether language models can use endpoint-contract text to identify semantic API request errors, and whether that behavior generalizes to endpoint families that were held out during training.
 
