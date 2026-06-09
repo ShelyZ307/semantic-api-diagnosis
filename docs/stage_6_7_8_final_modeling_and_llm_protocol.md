@@ -81,7 +81,7 @@ Current LLM status:
 - A later quota-safe resume completed the fixed sample with no transport or parse failures.
 - Successful responses: zero-shot 120 / 120; few-shot 120 / 120.
 - Results are documented as a clean fixed-sample LLM baseline, not as a full-test LLM benchmark.
-- Mock LLM outputs are not used as scientific evidence.
+- Only provider-backed LLM runs are reported as LLM baseline results; mock and dry-run outputs are used only for testing infrastructure.
 
 Same-sample non-LLM results:
 
@@ -100,6 +100,6 @@ The supported conclusion is:
 
 > The benchmark reveals that many examples are request-obvious and that visible rule-based validation is strong. RoBERTa learns contract-sensitive behavior and performs strongly in-domain, but unseen-family semantic generalization remains difficult. The most scientifically valuable part of Version 1 is the controlled dataset, contract-dependent subsets, shortcut views, and error analysis.
 
-## Remaining Missing Item
+## Version 1 Scope
 
-There is no required remaining model experiment for final submission. The provider-backed zero-shot/few-shot LLM baseline is now complete only for the fixed Stage 8 sample; it should remain clearly separated from the full-test local encoder comparison.
+For Version 1, no additional model experiment is required. The provider-backed zero-shot/few-shot LLM baseline is complete only for the fixed Stage 8 sample; it remains clearly separated from the full-test local encoder comparison.
