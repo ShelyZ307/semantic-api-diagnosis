@@ -260,6 +260,8 @@ The Version 1 tightening comparison is recorded in `docs/results/contract_depend
 
 Large LLMs are used only as zero/few-shot baselines. Fine-tuning is done on local encoder models such as DistilBERT and RoBERTa.
 
+Full DistilBERT and RoBERTa results are reported in `docs/results/fine_tuned_model_results.md`, including full seen/unseen tests, contract-dependent hard subsets, request-only and no-constraints shortcut views, threshold comparisons, and error analysis.
+
 Dry-run command:
 
 ```bash
@@ -342,5 +344,8 @@ Provider-backed `gpt-4o-mini` zero-shot and few-shot baselines were completed on
 Recommended reading order:
 
 1. `docs/SUBMISSION_SUMMARY.md` — concise reviewer-facing summary.
-2. `docs/results/baseline_results.md` — baseline metrics and contract-dependent subsets.
-3. `docs/results/contract_dependence_tightening_report.md` — shortcut-ablation tightening and quality gates.
+2. `docs/results/final_project_results_summary.md` — compact final results and scientific interpretation.
+3. `docs/results/fine_tuned_model_results.md` — full DistilBERT/RoBERTa encoder results across full, hard-subset, and shortcut views.
+4. `docs/results/baseline_results.md` — baseline metrics and contract-dependent subsets.
+5. `docs/results/contract_dependence_tightening_report.md` — shortcut-ablation tightening and quality gates.
+6. `docs/results/stage_8_llm_sample_baselines.md` — fixed 120-example provider-backed LLM sample baseline.
