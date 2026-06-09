@@ -129,7 +129,7 @@ Provider-backed LLM calls were completed with `gpt-4o-mini` on the same fixed sa
 - zero-shot: 120 / 120 successful provider responses
 - few-shot: 120 / 120 successful provider responses
 
-The sampled results are recorded in `docs/results/stage_8_llm_sample_baselines.md`. They are clean for the fixed 120-example sample, but they remain sampled baselines and do not replace the full-test encoder and rule-baseline evaluation. Mock LLM outputs must not be cited as scientific evidence.
+The sampled results are recorded in `docs/results/stage_8_llm_sample_baselines.md`. They are clean for the fixed 120-example sample, but they remain sampled baselines and do not replace the full-test encoder and rule-baseline evaluation. Only provider-backed LLM runs are reported as LLM baseline results; mock and dry-run outputs are used only for testing infrastructure.
 
 ## Final Scientific Interpretation
 
